@@ -3,21 +3,21 @@
 
 (function () {
   const NAV_ITEMS = [
-    { href: "index.html", label: "Home", key: "home" },
-    { href: "about.html", label: "About", key: "about" },
-    { href: "programs.html", label: "Programs", key: "programs" },
-    { href: "get-involved.html", label: "Get Involved", key: "involved" },
+    { href: "/", label: "Home", key: "home" },
+    { href: "/about", label: "About", key: "about" },
+    { href: "/programs", label: "Programs", key: "programs" },
+    { href: "/get-involved", label: "Get Involved", key: "involved" },
     {
       label: "Resources",
       key: "resources",
       dropdown: [
-        { href: "programs.html#fund", label: "Programs — What We Fund", desc: "Where every dollar goes" },
-        { href: "partners.html", label: "Our Partners", desc: "Organizations standing with us" },
-        { href: "reports.html", label: "Our Reports", desc: "Annual impact & financials" },
-        { href: "claude-application.html", label: "Claude Application", desc: "Apply for support or scholarship" },
+        { href: "/programs#fund", label: "Programs — What We Fund", desc: "Where every dollar goes" },
+        { href: "/partners", label: "Our Partners", desc: "Organizations standing with us" },
+        { href: "/reports", label: "Our Reports", desc: "Annual impact & financials" },
+        { href: "/apply", label: "Claude Application", desc: "Apply for support or scholarship" },
       ],
     },
-    { href: "contact.html", label: "Contact", key: "contact" },
+    { href: "/contact", label: "Contact", key: "contact" },
   ];
 
   function svg(d, viewBox = "0 0 24 24") {
@@ -65,7 +65,7 @@
         </g>
       </svg>`;
     return `
-      <a href="index.html" class="bf-logo" aria-label="The Claude Buzizi Foundation home">
+      <a href="/" class="bf-logo" aria-label="The Claude Buzizi Foundation home">
         <span class="bf-logo-mark">${mark}</span>
         <span class="bf-logo-text">
           <strong>Claude Buzizi</strong>
@@ -104,7 +104,7 @@
         <div class="bf-nav-inner">
           ${renderLogo()}
           <div class="bf-nav-links">${links}</div>
-          <a class="bf-btn bf-btn-primary bf-btn-sm" href="giving.html">${ICONS.heart} Donate</a>
+          <a class="bf-btn bf-btn-primary bf-btn-sm" href="/giving">${ICONS.heart} Donate</a>
         </div>
       </nav>`;
   }
@@ -118,24 +118,24 @@
             <div class="bf-footer-brand">
               ${renderLogo()}
               <p>Turning business income into meals, scholarships, and income-building skills for the people who need them most. Feed. Educate. Equip.</p>
-              <a class="bf-btn bf-btn-primary" href="giving.html">${ICONS.heart} Make a Donation</a>
+              <a class="bf-btn bf-btn-primary" href="/giving">${ICONS.heart} Make a Donation</a>
             </div>
             <div>
               <h4>Foundation</h4>
               <ul>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="programs.html">Programs</a></li>
-                <li><a href="reports.html">Annual Reports</a></li>
-                <li><a href="partners.html">Our Partners</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/programs">Programs</a></li>
+                <li><a href="/reports">Annual Reports</a></li>
+                <li><a href="/partners">Our Partners</a></li>
               </ul>
             </div>
             <div>
               <h4>Take Action</h4>
               <ul>
-                <li><a href="giving.html">Give</a></li>
-                <li><a href="get-involved.html">Volunteer</a></li>
-                <li><a href="claude-application.html">Apply for Support</a></li>
-                <li><a href="contact.html">Partner with Us</a></li>
+                <li><a href="/giving">Give</a></li>
+                <li><a href="/get-involved">Volunteer</a></li>
+                <li><a href="/apply">Apply for Support</a></li>
+                <li><a href="/contact">Partner with Us</a></li>
               </ul>
             </div>
             <div>

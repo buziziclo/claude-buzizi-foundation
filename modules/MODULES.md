@@ -1,13 +1,7 @@
 # Module Map — Claude Buzizi Foundation
 
-The Foundation site is a flat-file static site (HTML at the repo root) so it deploys
-cleanly to Vercel and stays editable in Lovable. This file maps every page to its
-**logical module**, so when a section needs work you know which files move together.
-
-**Why flat at root?** Lovable + Vercel both expect a flat structure. Moving pages
-into subfolders would break every relative `assets/…` reference and every nav link
-in `assets/shell.js`. Instead, modules live as a *logical* grouping you can navigate
-from this file.
+Pages are grouped by purpose under `modules/{group}/`. URLs are mapped to module
+paths via [`../vercel.json`](../vercel.json) `rewrites`.
 
 ---
 
@@ -15,47 +9,47 @@ from this file.
 The pages a first-time visitor lands on. Edit these together when the brand voice
 or top-level positioning changes.
 
-| Page | Purpose |
-|---|---|
-| [`index.html`](../index.html) | Home — hero, mission, pillars, story snapshot, founder, primary CTAs |
-| [`about.html`](../about.html) | Long-form story: Bisesero → Claver → Claude → today |
-| [`contact.html`](../contact.html) | Contact form + direct channels |
+| URL | File | Purpose |
+|---|---|---|
+| `/` | [`core/index.html`](core/index.html) | Home — hero, mission, pillars, story snapshot, founder, primary CTAs |
+| `/about` | [`core/about.html`](core/about.html) | Long-form story: Bisesero → Claver → Claude → today |
+| `/contact` | [`core/contact.html`](core/contact.html) | Contact form + direct channels |
 
-**Shared chrome:** `assets/shell.js` renders the nav + footer for every page.
+**Shared chrome:** [`../assets/shell.js`](../assets/shell.js) renders the nav + footer for every page.
 
 ---
 
 ## 2. `programs/` — What we do & who we do it with
 The "Resources" dropdown in the nav. These pages explain the work and who powers it.
 
-| Page | Purpose |
-|---|---|
-| [`programs.html`](../programs.html) | Three pillars: Feed (RAH) · Educate · Equip — flywheel mechanics |
-| [`partners.html`](../partners.html) | Partner logo wall: Rise Against Hunger, Earning Blueprints, Claude Buzizi, Mognetize Marketing |
-| [`reports.html`](../reports.html) | Annual report + financial statements (placeholder until 2025 close) |
+| URL | File | Purpose |
+|---|---|---|
+| `/programs` | [`programs/programs.html`](programs/programs.html) | Three pillars: Feed (RAH) · Educate · Equip — flywheel mechanics |
+| `/partners` | [`programs/partners.html`](programs/partners.html) | Partner logo wall: RAH, Earning Blueprints, Claude Buzizi, Mognetize Marketing |
+| `/reports` | [`programs/reports.html`](programs/reports.html) | Annual report + financial statements |
 
 ---
 
 ## 3. `giving/` — Donation & involvement funnels
 Every "way in" — from a $1 subscription to corporate matching.
 
-| Page | Purpose |
-|---|---|
-| [`get-involved.html`](../get-involved.html) | Six entry points: sponsor a seat, subscribe, ambassador, corporate, host event, donate |
-| [`giving.html`](../giving.html) | Donation flow with pillar designation |
-| [`claude-application.html`](../claude-application.html) | Inbound application: scholarship, masterclass seat, family meal support |
+| URL | File | Purpose |
+|---|---|---|
+| `/get-involved` | [`giving/get-involved.html`](giving/get-involved.html) | Six entry points: sponsor a seat, subscribe, ambassador, corporate, host event, donate |
+| `/giving` | [`giving/giving.html`](giving/giving.html) | Donation flow with pillar designation |
+| `/apply` | [`giving/claude-application.html`](giving/claude-application.html) | Inbound application: scholarship, masterclass seat, family meal support |
 
 ---
 
-## 4. `brand-lab/` — Logo & identity drafts (internal/working)
+## 4. `brand-lab/` — Logo & identity drafts (internal)
 Working drafts of logo treatments. Not linked from public nav — kept for review.
 
-| Page | Purpose |
-|---|---|
-| [`logo-lab.html`](../logo-lab.html) | Logo Lab v1 — original explorations |
-| [`logo-lab-v2.html`](../logo-lab-v2.html) | v2 — palette refinements |
-| [`logo-lab-v3.html`](../logo-lab-v3.html) | v3 — typographic studies |
-| [`logo-lab-v4.html`](../logo-lab-v4.html) | v4 — final candidates |
+| URL | File | Purpose |
+|---|---|---|
+| `/logo-lab` | [`brand-lab/logo-lab.html`](brand-lab/logo-lab.html) | Logo Lab v1 — original explorations |
+| `/logo-lab-v2` | [`brand-lab/logo-lab-v2.html`](brand-lab/logo-lab-v2.html) | v2 — palette refinements |
+| `/logo-lab-v3` | [`brand-lab/logo-lab-v3.html`](brand-lab/logo-lab-v3.html) | v3 — typographic studies |
+| `/logo-lab-v4` | [`brand-lab/logo-lab-v4.html`](brand-lab/logo-lab-v4.html) | v4 — final candidates |
 
 ---
 
@@ -63,32 +57,34 @@ Working drafts of logo treatments. Not linked from public nav — kept for revie
 
 | Path | What |
 |---|---|
-| [`assets/foundation.css`](../assets/foundation.css) | Master design system (colors, type scale, components) |
-| [`assets/spacing-fixes.css`](../assets/spacing-fixes.css) | Spacing/polish overrides applied site-wide |
-| [`assets/tokens.css`](../assets/tokens.css) | Color & font tokens |
-| [`assets/shell.js`](../assets/shell.js) | Renders shared nav + footer (`<div data-shell="nav">`) |
-| [`assets/tweaks-panel.jsx`](../assets/tweaks-panel.jsx) | Dev-only design tweaks panel (React/Babel) |
-| [`assets/partners/`](../assets/partners/) | Partner logos: RAH, Earning Blueprints, Claude Buzizi, Mognetize Marketing |
-| [`assets/photos/`](../assets/photos/) | Editorial / hero photography |
-| [`uploads/`](../uploads/) | User-uploaded images (CB portraits, screenshots) |
+| [`../assets/foundation.css`](../assets/foundation.css) | Master design system (colors, type scale, components) |
+| [`../assets/spacing-fixes.css`](../assets/spacing-fixes.css) | Spacing/polish overrides applied site-wide |
+| [`../assets/tokens.css`](../assets/tokens.css) | Color & font tokens |
+| [`../assets/shell.js`](../assets/shell.js) | Renders shared nav + footer |
+| [`../assets/partners/`](../assets/partners/) | Partner logos: RAH, Earning Blueprints, Claude Buzizi, Mognetize Marketing |
+| [`../assets/photos/`](../assets/photos/) | Editorial / hero photography |
+| [`../uploads/`](../uploads/) | User-uploaded images (CB portraits, screenshots) |
 
 ---
 
-## Routing
+## Adding a new page (checklist)
 
-`vercel.json` provides clean URLs in production — no `.html` extension required:
+1. Decide which module it belongs to (or create a new one if needed).
+2. Copy a sibling page in that folder; rename and edit.
+3. Update `<title>` and the `data-active` key on `<div data-shell="nav">`.
+4. Add a clean-URL rewrite to [`../vercel.json`](../vercel.json).
+5. Add a row to this file + the module's own `README.md`.
+6. If it should appear in the nav, edit `NAV_ITEMS` in [`../assets/shell.js`](../assets/shell.js).
 
-| URL | Serves |
-|---|---|
-| `/` | `index.html` |
-| `/about` | `about.html` |
-| `/programs` | `programs.html` |
-| `/partners` | `partners.html` |
-| `/reports` | `reports.html` |
-| `/get-involved` | `get-involved.html` |
-| `/giving` | `giving.html` |
-| `/contact` | `contact.html` |
-| `/apply` | `claude-application.html` |
+## Local preview
 
-`assets/shell.js` still uses `.html` hrefs so local file:// previews work — Vercel
-serves them at both the clean and the `.html` URL.
+Asset paths are root-relative (`/assets/...`), so file:// won't resolve them.
+Run a server:
+
+```bash
+# Recommended (full rewrites + clean URLs):
+vercel dev
+
+# Alternative (works for assets, but visit pages at /modules/{group}/{page}.html):
+python3 -m http.server 8080
+```

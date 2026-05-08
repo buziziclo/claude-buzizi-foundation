@@ -1,9 +1,21 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/apply", "destination": "/claude-application" }
+    { "source": "/", "destination": "/modules/core/index.html" },
+    { "source": "/about", "destination": "/modules/core/about.html" },
+    { "source": "/contact", "destination": "/modules/core/contact.html" },
+    { "source": "/programs", "destination": "/modules/programs/programs.html" },
+    { "source": "/partners", "destination": "/modules/programs/partners.html" },
+    { "source": "/reports", "destination": "/modules/programs/reports.html" },
+    { "source": "/get-involved", "destination": "/modules/giving/get-involved.html" },
+    { "source": "/giving", "destination": "/modules/giving/giving.html" },
+    { "source": "/apply", "destination": "/modules/giving/claude-application.html" },
+    { "source": "/logo-lab", "destination": "/modules/brand-lab/logo-lab.html" },
+    { "source": "/logo-lab-v2", "destination": "/modules/brand-lab/logo-lab-v2.html" },
+    { "source": "/logo-lab-v3", "destination": "/modules/brand-lab/logo-lab-v3.html" },
+    { "source": "/logo-lab-v4", "destination": "/modules/brand-lab/logo-lab-v4.html" }
   ],
   "headers": [
     {
