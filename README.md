@@ -33,3 +33,5 @@ python3 -m http.server 8080
 
 ## Editing
 Full editing guide in [`CLAUDE.md`](CLAUDE.md).
+
+<!-- Last verified deploy: 2026-05-08T17:02:56Z -->
