@@ -115,11 +115,12 @@
               <label class="bf-label" for="message">Message</label>
               <textarea class="bf-textarea" id="message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
             </div>
-            <button class="bf-btn bf-btn-primary bf-btn-lg" type="submit" style="justify-content: center;">
-              Send Message
+            <button class="bf-btn bf-btn-primary bf-btn-lg" type="submit" id="contact-submit" style="justify-content: center;">
+              <span class="bf-btn-label">Send Message</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
-            <div class="bf-success" id="success">✓ Message received. We'll get back to you within 48 hours.</div>
+            <div class="bf-success" id="success">✓ Message received. We've sent you a confirmation — Claude will reply within 48 hours.</div>
+            <div class="bf-error" id="error" style="display:none; margin-top: 12px; padding: 12px 16px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; color: #991b1b; font-size: 14px;"></div>
           </form>
         </div>
       </div>
@@ -219,12 +220,53 @@
 <script type="text/babel" src="/assets/tweaks-panel.jsx"></script>
 <script type="text/babel" src="/assets/tweaks-controller.jsx"></script>
 <script>
-document.getElementById("contact-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  document.getElementById("success").classList.add("show");
-  e.target.reset();
-  setTimeout(() => document.getElementById("success").classList.remove("show"), 6000);
-});
+(function () {
+  var form = document.getElementById("contact-form");
+  var btn = document.getElementById("contact-submit");
+  var btnLabel = btn.querySelector(".bf-btn-label");
+  var success = document.getElementById("success");
+  var errorBox = document.getElementById("error");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    success.classList.remove("show");
+    errorBox.style.display = "none";
+    errorBox.textContent = "";
+
+    var data = {
+      first: document.getElementById("first").value.trim(),
+      last: document.getElementById("last").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      topic: document.getElementById("topic").value,
+      message: document.getElementById("message").value.trim(),
+    };
+
+    btn.disabled = true;
+    var originalLabel = btnLabel.textContent;
+    btnLabel.textContent = "Sending…";
+
+    try {
+      var res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data),
+      });
+      var json = await res.json().catch(function () { return {}; });
+      if (!res.ok || !json.ok) {
+        throw new Error(json.error || "Sorry, something went wrong. Please email claude@claudebuzizi.com directly.");
+      }
+      success.classList.add("show");
+      form.reset();
+      setTimeout(function () { success.classList.remove("show"); }, 8000);
+    } catch (err) {
+      errorBox.textContent = err.message || "Sorry, something went wrong. Please email claude@claudebuzizi.com directly.";
+      errorBox.style.display = "block";
+    } finally {
+      btn.disabled = false;
+      btnLabel.textContent = originalLabel;
+    }
+  });
+})();
 </script>
 </body>
 </html>
