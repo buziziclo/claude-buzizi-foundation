@@ -19,56 +19,13 @@
   .bf-cards.cols-3 { grid-template-columns: 1fr; }
 }
 
-/* Numlist meta — clean two-line stack: bold label, soft value below */
-.bf-numitem-meta { gap: 14px !important; }
-.bf-numitem-meta span {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  line-height: 1.4;
-}
-.bf-numitem-meta b {
-  font-size: 11px !important;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--page-fg) !important;
-  font-weight: 700 !important;
-}
-.bf-numitem-meta em {
-  font-style: normal;
-  font-size: 14px;
-  color: var(--page-fg-soft);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
+/* Numlist meta — keep original inline rhythm; favicons are subtle inline marks */
 .bf-numitem-meta .bf-meta-mark {
-  flex: 0 0 auto;
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+  margin-right: 4px;
   object-fit: contain;
-  background: #fff;
-  padding: 1px;
-  border: 1px solid hsl(var(--bf-rule));
-  display: block;
-}
-
-/* Pillar partner subtitle — small italic note next to "Feed", "Educate", "Equip" */
-.bf-pillar-partner {
-  display: inline;
-  font-family: var(--font-sans);
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--page-fg-soft);
-  letter-spacing: 0;
-}
-.bf-pillar-mark {
-  height: 22px;
-  width: 22px;
-  vertical-align: -5px;
-  margin-left: 6px;
-  border-radius: 4px;
   display: inline-block;
 }
 
