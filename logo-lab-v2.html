@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logo Lab v2 — Claude Buzizi Foundation</title>
+<link rel="stylesheet" href="assets/foundation.css" />
+<link rel="stylesheet" href="assets/spacing-fixes.css" />
+<style>
+  body { background: #f4f1ea; }
+  .lab { max-width: 1280px; margin: 0 auto; padding: 80px 32px 120px; }
+  .lab-head { max-width: 760px; margin-bottom: 64px; }
+  .lab-head h1 { font-family: var(--font-display); font-size: clamp(40px, 5vw, 64px); letter-spacing: -0.025em; color: var(--page-fg); margin: 12px 0 16px; line-height: 1.05; }
+  .lab-head p { font-size: 18px; color: var(--page-fg-muted); line-height: 1.6; }
+  .lab-head p + p { margin-top: 12px; }
+
+  .opt {
+    background: white;
+    border: 1px solid hsl(var(--bf-rule));
+    border-radius: 24px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .opt-stage {
+    padding: 64px 56px;
+    background: linear-gradient(180deg, #fafaf6 0%, white 100%);
+    border-bottom: 1px solid hsl(var(--bf-rule));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+  }
+  .opt-meta {
+    padding: 32px 56px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .opt-id {
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--bf-accent);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .opt-name {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin: 0 0 8px;
+  }
+  .opt-meta p { font-size: 15.5px; line-height: 1.7; color: var(--page-fg-muted); margin: 0; }
+  .opt-meta p + p { margin-top: 12px; }
+  .opt-meta b { color: var(--page-fg); font-weight: 600; }
+  .opt-tag {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.55);
+    background: hsl(var(--bf-cream));
+    border: 1px solid hsl(var(--bf-rule));
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+
+  .ctx-row {
+    display: flex; align-items: center; gap: 64px; flex-wrap: wrap;
+    padding: 24px 56px;
+    background: #faf8f4;
+    border-top: 1px solid hsl(var(--bf-rule));
+  }
+  .ctx-row.dark {
+    background: hsl(220 25% 9%);
+    border-top-color: rgba(255,255,255,0.06);
+  }
+  .ctx-label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--page-fg-muted);
+  }
+  .ctx-row.dark .ctx-label { color: hsl(var(--bf-gold-soft)); }
+
+  /* ===================== SHARED LOGO LAYOUT ===================== */
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    text-decoration: none;
+    color: hsl(var(--bf-ink));
+  }
+  .logo-mark {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    display: block;
+    color: hsl(var(--bf-ink));
+  }
+  .logo-mark .accent { color: var(--bf-accent); }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+    gap: 5px;
+  }
+  .logo-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    color: hsl(var(--bf-ink));
+  }
+  .logo-sub {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.55);
+  }
+  /* divider variant */
+  .logo.divided .logo-text {
+    border-left: 1px solid hsl(var(--bf-ink) / 0.2);
+    padding-left: 18px;
+  }
+  /* dark stage */
+  .ctx-row.dark .logo { color: white; }
+  .ctx-row.dark .logo-mark { color: white; }
+  .ctx-row.dark .logo-mark .accent { color: hsl(var(--bf-gold)); }
+  .ctx-row.dark .logo-name { color: white; }
+  .ctx-row.dark .logo-sub { color: hsl(var(--bf-gold-soft) / 0.75); }
+  .ctx-row.dark .logo.divided .logo-text { border-left-color: rgba(255,255,255,0.25); }
+
+  /* small (header) sizes */
+  .small .logo-mark { width: 40px; height: 40px; }
+  .small .logo-name { font-size: 15px; }
+  .small .logo-sub { font-size: 7.5px; letter-spacing: 0.32em; }
+  .small.logo, .small .logo { gap: 12px; }
+  .small .logo.divided .logo-text { padding-left: 12px; }
+
+  .pickrow {
+    background: hsl(var(--bf-ink));
+    color: white;
+    padding: 48px 56px;
+    border-radius: 24px;
+    margin-top: 48px;
+  }
+  .pickrow h3 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: white;
+    max-width: 760px;
+    margin: 12px 0;
+  }
+  .pickrow p {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 760px;
+    color: hsl(0 0% 100% / 0.78);
+  }
+</style>
+</head>
+<body class="bf">
+
+<div class="lab">
+  <header class="lab-head">
+    <span class="bf-eyebrow">Logo Lab — Round 2</span>
+    <h1>Six mission-driven marks, all icon-left.</h1>
+    <p>The Rwandan sun is the through-line: 24 rays around a central disc, symbolizing enlightenment, unity, and a new dawn for the nation. I've used it as the anchor and stretched it across six directions — sun + sheltering hand, sun + open palm, sun + sorghum stalk, sun rising over a hill, sun as a community gathering, sun as an open doorway.</p>
+    <p>Every mark sits left, every wordmark sits right, and the proportions match a real header. Pick the one that lands.</p>
+  </header>
+
+  <!-- ========================================================================== -->
+  <!-- OPTION 1 — RWANDAN SUN (Pure heritage reference)                            -->
+  <!-- ========================================================================== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="logo" style="gap: 22px;">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <!-- 24 rays -->
+          <g>
+            <!-- inner ring of rays - generated as 24 lines around center 32,32 -->
+            <line x1="32" y1="6"  x2="32" y2="14"/>
+            <line x1="32" y1="50" x2="32" y2="58"/>
+            <line x1="6"  y1="32" x2="14" y2="32"/>
+            <line x1="50" y1="32" x2="58" y2="32"/>
+            <line x1="13.7" y1="13.7" x2="19.3" y2="19.3"/>
+            <line x1="44.7" y1="44.7" x2="50.3" y2="50.3"/>
+            <line x1="13.7" y1="50.3" x2="19.3" y2="44.7"/>
+            <line x1="44.7" y1="19.3" x2="50.3" y2="13.7"/>
+            <line x1="19.5" y1="8.5" x2="22"  y2="14.7"/>
+            <line x1="42"   y1="49.3" x2="44.5" y2="55.5"/>
+            <line x1="44.5" y1="8.5" x2="42"   y2="14.7"/>
+            <line x1="22"   y1="49.3" x2="19.5" y2="55.5"/>
+            <line x1="8.5"  y1="19.5" x2="14.7" y2="22"/>
+            <line x1="49.3" y1="42"   x2="55.5" y2="44.5"/>
+            <line x1="8.5"  y1="44.5" x2="14.7" y2="42"/>
+            <line x1="49.3" y1="22"   x2="55.5" y2="19.5"/>
+          </g>
+          <!-- center disc (filled accent) -->
+          <circle cx="32" cy="32" r="9" fill="currentColor" stroke="none" class="accent"/>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-name">Claude Buzizi Foundation</span>
+          <span class="logo-sub">Feed · Educate · Equip</span>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <span class="opt-tag">Pure heritage</span>
+        <div class="opt-id">Option 01</div>
+        <h3 class="opt-name">Rwandan Sun</h3>
+      </div>
+      <div>
+        <p>The sun from Rwanda's flag, drawn precisely: 24 rays of equal length around a solid disc. The disc is the only filled element in the mark, painted in your accent gold-orange. Everything else is a hairline.</p>
+        <p><b>Why it works:</b> Direct, unambiguous, and instantly readable as Rwandan to anyone from the region. The mission of "enlightenment" is built into the symbol the country chose for itself.</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="logo small">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="32" y1="6" x2="32" y2="14"/><line x1="32" y1="50" x2="32" y2="58"/><line x1="6" y1="32" x2="14" y2="32"/><line x1="50" y1="32" x2="58" y2="32"/><line x1="13.7" y1="13.7" x2="19.3" y2="19.3"/><line x1="44.7" y1="44.7" x2="50.3" y2="50.3"/><line x1="13.7" y1="50.3" x2="19.3" y2="44.7"/><line x1="44.7" y1="19.3" x2="50.3" y2="13.7"/><line x1="19.5" y1="8.5" x2="22" y2="14.7"/><line x1="42" y1="49.3" x2="44.5" y2="55.5"/><line x1="44.5" y1="8.5" x2="42" y2="14.7"/><line x1="22" y1="49.3" x2="19.5" y2="55.5"/><line x1="8.5" y1="19.5" x2="14.7" y2="22"/><line x1="49.3" y1="42" x2="55.5" y2="44.5"/><line x1="8.5" y1="44.5" x2="14.7" y2="42"/><line x1="49.3" y1="22" x2="55.5" y2="19.5"/><circle cx="32" cy="32" r="9" fill="currentColor" stroke="none" class="accent"/></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Feed · Educate · Equip</span></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="logo small">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="32" y1="6" x2="32" y2="14"/><line x1="32" y1="50" x2="32" y2="58"/><line x1="6" y1="32" x2="14" y2="32"/><line x1="50" y1="32" x2="58" y2="32"/><line x1="13.7" y1="13.7" x2="19.3" y2="19.3"/><line x1="44.7" y1="44.7" x2="50.3" y2="50.3"/><line x1="13.7" y1="50.3" x2="19.3" y2="44.7"/><line x1="44.7" y1="19.3" x2="50.3" y2="13.7"/><line x1="19.5" y1="8.5" x2="22" y2="14.7"/><line x1="42" y1="49.3" x2="44.5" y2="55.5"/><line x1="44.5" y1="8.5" x2="42" y2="14.7"/><line x1="22" y1="49.3" x2="19.5" y2="55.5"/><line x1="8.5" y1="19.5" x2="14.7" y2="22"/><line x1="49.3" y1="42" x2="55.5" y2="44.5"/><line x1="8.5" y1="44.5" x2="14.7" y2="42"/><line x1="49.3" y1="22" x2="55.5" y2="19.5"/><circle cx="32" cy="32" r="9" fill="currentColor" stroke="none" class="accent"/></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Feed · Educate · Equip</span></span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ========================================================================== -->
+  <!-- OPTION 2 — SUN OVER SHELTERING HAND                                         -->
+  <!-- ========================================================================== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="logo" style="gap: 22px;">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <!-- Rwandan sun, smaller, top -->
+          <g transform="translate(32 22)">
+            <line x1="0" y1="-14" x2="0" y2="-9"/>
+            <line x1="0" y1="9"   x2="0" y2="14"/>
+            <line x1="-14" y1="0" x2="-9" y2="0"/>
+            <line x1="9" y1="0"   x2="14" y2="0"/>
+            <line x1="-9.9" y1="-9.9" x2="-6.4" y2="-6.4"/>
+            <line x1="6.4" y1="6.4"   x2="9.9" y2="9.9"/>
+            <line x1="-9.9" y1="9.9"  x2="-6.4" y2="6.4"/>
+            <line x1="6.4" y1="-6.4"  x2="9.9" y2="-9.9"/>
+            <circle cx="0" cy="0" r="5" fill="currentColor" stroke="none" class="accent"/>
+          </g>
+          <!-- Sheltering open hand / cup at the bottom -->
+          <path d="M 10 44 Q 32 56, 54 44" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-name">Claude Buzizi Foundation</span>
+          <span class="logo-sub">Feed · Educate · Equip</span>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <span class="opt-tag">Heritage + mission</span>
+        <div class="opt-id">Option 02</div>
+        <h3 class="opt-name">Sun Over Open Hand</h3>
+      </div>
+      <div>
+        <p>The Rwandan sun above an open palm — the sun gives, the hand catches. Reads as both "a new dawn rises over a community" and "we hold what's given."</p>
+        <p><b>Why it works:</b> Two of the most universal symbols of human help, layered. The hand keeps it from being purely national — anyone from anywhere reads "support" before they read "Rwanda."</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="logo small">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><g transform="translate(32 22)"><line x1="0" y1="-14" x2="0" y2="-9"/><line x1="0" y1="9" x2="0" y2="14"/><line x1="-14" y1="0" x2="-9" y2="0"/><line x1="9" y1="0" x2="14" y2="0"/><line x1="-9.9" y1="-9.9" x2="-6.4" y2="-6.4"/><line x1="6.4" y1="6.4" x2="9.9" y2="9.9"/><line x1="-9.9" y1="9.9" x2="-6.4" y2="6.4"/><line x1="6.4" y1="-6.4" x2="9.9" y2="-9.9"/><circle cx="0" cy="0" r="5" fill="currentColor" stroke="none" class="accent"/></g><path d="M 10 44 Q 32 56, 54 44" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Feed · Educate · Equip</span></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="logo small">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><g transform="translate(32 22)"><line x1="0" y1="-14" x2="0" y2="-9"/><line x1="0" y1="9" x2="0" y2="14"/><line x1="-14" y1="0" x2="-9" y2="0"/><line x1="9" y1="0" x2="14" y2="0"/><line x1="-9.9" y1="-9.9" x2="-6.4" y2="-6.4"/><line x1="6.4" y1="6.4" x2="9.9" y2="9.9"/><line x1="-9.9" y1="9.9" x2="-6.4" y2="6.4"/><line x1="6.4" y1="-6.4" x2="9.9" y2="-9.9"/><circle cx="0" cy="0" r="5" fill="currentColor" stroke="none" class="accent"/></g><path d="M 10 44 Q 32 56, 54 44" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Feed · Educate · Equip</span></span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ========================================================================== -->
+  <!-- OPTION 3 — SUN RISING OVER A HILL (Land of a Thousand Hills)                -->
+  <!-- ========================================================================== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="logo divided" style="gap: 22px;">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <!-- Three hills (Rwanda = Land of a Thousand Hills) -->
+          <path d="M 4 50 Q 14 38, 24 46 Q 32 38, 40 46 Q 50 38, 60 50" stroke-width="1.6"/>
+          <!-- Sun rising behind the middle hill -->
+          <circle cx="32" cy="32" r="9" fill="currentColor" stroke="none" class="accent"/>
+          <!-- Rays above the hills -->
+          <line x1="32" y1="8"  x2="32" y2="14"/>
+          <line x1="14" y1="14" x2="18" y2="18"/>
+          <line x1="50" y1="14" x2="46" y2="18"/>
+          <line x1="6"  y1="28" x2="12" y2="28"/>
+          <line x1="58" y1="28" x2="52" y2="28"/>
+          <line x1="9"  y1="20" x2="14" y2="22"/>
+          <line x1="55" y1="20" x2="50" y2="22"/>
+          <!-- Ground line -->
+          <line x1="4" y1="56" x2="60" y2="56" stroke-width="0.8" stroke-opacity="0.4"/>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-name">Claude Buzizi Foundation</span>
+          <span class="logo-sub">Viscero · Kiwi · Rwanda</span>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <span class="opt-tag">Place + dawn</span>
+        <div class="opt-id">Option 03</div>
+        <h3 class="opt-name">Dawn Over the Hills</h3>
+      </div>
+      <div>
+        <p>The Rwandan sun rising behind three hills — Rwanda is "the Land of a Thousand Hills." A literal sunrise over the place the story began. Subtitle anchors it to Viscero, Kiwi.</p>
+        <p><b>Why it works:</b> Rooted in geography <em>and</em> mission. "A new dawn over the village" is exactly the work. The hills are recognizable to anyone from the region without being a literal map.</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="logo small divided">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M 4 50 Q 14 38, 24 46 Q 32 38, 40 46 Q 50 38, 60 50" stroke-width="1.8"/><circle cx="32" cy="32" r="9" fill="currentColor" stroke="none" class="accent"/><line x1="32" y1="8" x2="32" y2="14"/><line x1="14" y1="14" x2="18" y2="18"/><line x1="50" y1="14" x2="46" y2="18"/><line x1="6" y1="28" x2="12" y2="28"/><line x1="58" y1="28" x2="52" y2="28"/><line x1="9" y1="20" x2="14" y2="22"/><line x1="55" y1="20" x2="50" y2="22"/></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Viscero · Kiwi · Rwanda</span></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="logo small divided">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M 4 50 Q 14 38, 24 46 Q 32 38, 40 46 Q 50 38, 60 50" stroke-width="1.8"/><circle cx="32" cy="32" r="9" fill="currentColor" stroke="none" class="accent"/><line x1="32" y1="8" x2="32" y2="14"/><line x1="14" y1="14" x2="18" y2="18"/><line x1="50" y1="14" x2="46" y2="18"/><line x1="6" y1="28" x2="12" y2="28"/><line x1="58" y1="28" x2="52" y2="28"/><line x1="9" y1="20" x2="14" y2="22"/><line x1="55" y1="20" x2="50" y2="22"/></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Viscero · Kiwi · Rwanda</span></span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ========================================================================== -->
+  <!-- OPTION 4 — SUN AS A GATHERING (rays as people)                              -->
+  <!-- ========================================================================== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="logo" style="gap: 22px;">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <!-- Center disc -->
+          <circle cx="32" cy="32" r="7" fill="currentColor" stroke="none" class="accent"/>
+          <!-- 8 figures arranged around the sun (head + body) -->
+          <g>
+            <!-- top -->
+            <circle cx="32" cy="10" r="1.8" stroke-width="1.2"/>
+            <path d="M 32 12.6 L 32 17" />
+            <!-- right -->
+            <circle cx="54" cy="32" r="1.8" stroke-width="1.2"/>
+            <path d="M 51.4 32 L 47 32"/>
+            <!-- bottom -->
+            <circle cx="32" cy="54" r="1.8" stroke-width="1.2"/>
+            <path d="M 32 51.4 L 32 47"/>
+            <!-- left -->
+            <circle cx="10" cy="32" r="1.8" stroke-width="1.2"/>
+            <path d="M 12.6 32 L 17 32"/>
+            <!-- diagonals -->
+            <circle cx="16.5" cy="16.5" r="1.8" stroke-width="1.2"/>
+            <path d="M 18.3 18.3 L 21.4 21.4"/>
+            <circle cx="47.5" cy="16.5" r="1.8" stroke-width="1.2"/>
+            <path d="M 45.7 18.3 L 42.6 21.4"/>
+            <circle cx="16.5" cy="47.5" r="1.8" stroke-width="1.2"/>
+            <path d="M 18.3 45.7 L 21.4 42.6"/>
+            <circle cx="47.5" cy="47.5" r="1.8" stroke-width="1.2"/>
+            <path d="M 45.7 45.7 L 42.6 42.6"/>
+          </g>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-name">Claude Buzizi Foundation</span>
+          <span class="logo-sub">Feed · Educate · Equip</span>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <span class="opt-tag">Community</span>
+        <div class="opt-id">Option 04</div>
+        <h3 class="opt-name">Gathering Around the Sun</h3>
+      </div>
+      <div>
+        <p>The 24 rays of the Rwandan sun reinterpreted as 8 figures gathered around a central source. The sun feeds, educates, equips — and people circle it. Each figure is a head + body, drawn at the cardinal and ordinal points.</p>
+        <p><b>Why it works:</b> Less literal than a flag reference, more about <em>what the sun does</em>. Says "community" before it says "country." Reads as warmth and gathering at any size.</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="logo small">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="32" cy="32" r="7" fill="currentColor" stroke="none" class="accent"/><g><circle cx="32" cy="10" r="1.8" stroke-width="1.2"/><path d="M 32 12.6 L 32 17"/><circle cx="54" cy="32" r="1.8" stroke-width="1.2"/><path d="M 51.4 32 L 47 32"/><circle cx="32" cy="54" r="1.8" stroke-width="1.2"/><path d="M 32 51.4 L 32 47"/><circle cx="10" cy="32" r="1.8" stroke-width="1.2"/><path d="M 12.6 32 L 17 32"/><circle cx="16.5" cy="16.5" r="1.8" stroke-width="1.2"/><path d="M 18.3 18.3 L 21.4 21.4"/><circle cx="47.5" cy="16.5" r="1.8" stroke-width="1.2"/><path d="M 45.7 18.3 L 42.6 21.4"/><circle cx="16.5" cy="47.5" r="1.8" stroke-width="1.2"/><path d="M 18.3 45.7 L 21.4 42.6"/><circle cx="47.5" cy="47.5" r="1.8" stroke-width="1.2"/><path d="M 45.7 45.7 L 42.6 42.6"/></g></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Feed · Educate · Equip</span></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="logo small">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="32" cy="32" r="7" fill="currentColor" stroke="none" class="accent"/><g><circle cx="32" cy="10" r="1.8" stroke-width="1.2"/><path d="M 32 12.6 L 32 17"/><circle cx="54" cy="32" r="1.8" stroke-width="1.2"/><path d="M 51.4 32 L 47 32"/><circle cx="32" cy="54" r="1.8" stroke-width="1.2"/><path d="M 32 51.4 L 32 47"/><circle cx="10" cy="32" r="1.8" stroke-width="1.2"/><path d="M 12.6 32 L 17 32"/><circle cx="16.5" cy="16.5" r="1.8" stroke-width="1.2"/><path d="M 18.3 18.3 L 21.4 21.4"/><circle cx="47.5" cy="16.5" r="1.8" stroke-width="1.2"/><path d="M 45.7 18.3 L 42.6 21.4"/><circle cx="16.5" cy="47.5" r="1.8" stroke-width="1.2"/><path d="M 18.3 45.7 L 21.4 42.6"/><circle cx="47.5" cy="47.5" r="1.8" stroke-width="1.2"/><path d="M 45.7 45.7 L 42.6 42.6"/></g></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Feed · Educate · Equip</span></span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ========================================================================== -->
+  <!-- OPTION 5 — SUN + SORGHUM STALK                                              -->
+  <!-- ========================================================================== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="logo divided" style="gap: 22px;">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <!-- Sun, top-left quadrant -->
+          <g transform="translate(20 20)">
+            <circle cx="0" cy="0" r="6" fill="currentColor" stroke="none" class="accent"/>
+            <line x1="0" y1="-12" x2="0" y2="-9"/>
+            <line x1="0" y1="9"   x2="0" y2="12"/>
+            <line x1="-12" y1="0" x2="-9" y2="0"/>
+            <line x1="9" y1="0"   x2="12" y2="0"/>
+            <line x1="-8.5" y1="-8.5" x2="-6.4" y2="-6.4"/>
+            <line x1="6.4" y1="6.4"   x2="8.5" y2="8.5"/>
+            <line x1="-8.5" y1="8.5"  x2="-6.4" y2="6.4"/>
+            <line x1="6.4" y1="-6.4"  x2="8.5" y2="-8.5"/>
+          </g>
+          <!-- Sorghum stalk: central stem, grain head at top, leaves -->
+          <g stroke-width="1.5">
+            <!-- stem -->
+            <path d="M 44 56 L 44 32" stroke-linecap="round"/>
+            <!-- grain head: cluster of small ovals -->
+            <g class="accent" stroke="currentColor" fill="currentColor">
+              <ellipse cx="44" cy="20" rx="2" ry="3"/>
+              <ellipse cx="40" cy="24" rx="2" ry="3"/>
+              <ellipse cx="48" cy="24" rx="2" ry="3"/>
+              <ellipse cx="42" cy="14" rx="2" ry="3"/>
+              <ellipse cx="46" cy="14" rx="2" ry="3"/>
+              <ellipse cx="44" cy="8"  rx="2" ry="3"/>
+            </g>
+            <!-- two leaves -->
+            <path d="M 44 38 Q 36 36, 32 42" fill="none" stroke-linecap="round"/>
+            <path d="M 44 46 Q 52 44, 56 50" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-name">Claude Buzizi Foundation</span>
+          <span class="logo-sub">Feed · Educate · Equip</span>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <span class="opt-tag">Heritage + harvest</span>
+        <div class="opt-id">Option 05</div>
+        <h3 class="opt-name">Sun and Sorghum</h3>
+      </div>
+      <div>
+        <p>The Rwandan sun in the upper-left, with a stalk of sorghum (the staple grain of Rwanda and East Africa) rising on the right. The grain head is set in your accent color. Two icons of life and sustenance, side by side.</p>
+        <p><b>Why it works:</b> Specifically agricultural, specifically Rwandan. Sorghum is what the village eats. The Foundation feeds. The icon already says it before the wordmark does.</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="logo small divided">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><g transform="translate(20 20)"><circle cx="0" cy="0" r="6" fill="currentColor" stroke="none" class="accent"/><line x1="0" y1="-12" x2="0" y2="-9"/><line x1="0" y1="9" x2="0" y2="12"/><line x1="-12" y1="0" x2="-9" y2="0"/><line x1="9" y1="0" x2="12" y2="0"/><line x1="-8.5" y1="-8.5" x2="-6.4" y2="-6.4"/><line x1="6.4" y1="6.4" x2="8.5" y2="8.5"/><line x1="-8.5" y1="8.5" x2="-6.4" y2="6.4"/><line x1="6.4" y1="-6.4" x2="8.5" y2="-8.5"/></g><g stroke-width="1.6"><path d="M 44 56 L 44 32" stroke-linecap="round"/><g class="accent" stroke="currentColor" fill="currentColor"><ellipse cx="44" cy="20" rx="2" ry="3"/><ellipse cx="40" cy="24" rx="2" ry="3"/><ellipse cx="48" cy="24" rx="2" ry="3"/><ellipse cx="42" cy="14" rx="2" ry="3"/><ellipse cx="46" cy="14" rx="2" ry="3"/><ellipse cx="44" cy="8" rx="2" ry="3"/></g><path d="M 44 38 Q 36 36, 32 42" fill="none" stroke-linecap="round"/><path d="M 44 46 Q 52 44, 56 50" fill="none" stroke-linecap="round"/></g></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Feed · Educate · Equip</span></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="logo small divided">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><g transform="translate(20 20)"><circle cx="0" cy="0" r="6" fill="currentColor" stroke="none" class="accent"/><line x1="0" y1="-12" x2="0" y2="-9"/><line x1="0" y1="9" x2="0" y2="12"/><line x1="-12" y1="0" x2="-9" y2="0"/><line x1="9" y1="0" x2="12" y2="0"/><line x1="-8.5" y1="-8.5" x2="-6.4" y2="-6.4"/><line x1="6.4" y1="6.4" x2="8.5" y2="8.5"/><line x1="-8.5" y1="8.5" x2="-6.4" y2="6.4"/><line x1="6.4" y1="-6.4" x2="8.5" y2="-8.5"/></g><g stroke-width="1.6"><path d="M 44 56 L 44 32" stroke-linecap="round"/><g class="accent" stroke="currentColor" fill="currentColor"><ellipse cx="44" cy="20" rx="2" ry="3"/><ellipse cx="40" cy="24" rx="2" ry="3"/><ellipse cx="48" cy="24" rx="2" ry="3"/><ellipse cx="42" cy="14" rx="2" ry="3"/><ellipse cx="46" cy="14" rx="2" ry="3"/><ellipse cx="44" cy="8" rx="2" ry="3"/></g><path d="M 44 38 Q 36 36, 32 42" fill="none" stroke-linecap="round"/><path d="M 44 46 Q 52 44, 56 50" fill="none" stroke-linecap="round"/></g></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Feed · Educate · Equip</span></span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ========================================================================== -->
+  <!-- OPTION 6 — SUN INSIDE A DOORWAY (Open Doorway / Threshold)                  -->
+  <!-- ========================================================================== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="logo" style="gap: 22px;">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <!-- Doorway / threshold (rounded arch) -->
+          <path d="M 14 56 L 14 28 Q 14 8, 32 8 Q 50 8, 50 28 L 50 56" stroke-linejoin="round"/>
+          <!-- Floor line -->
+          <line x1="8" y1="56" x2="56" y2="56" stroke-width="0.8"/>
+          <!-- Sun rising inside the doorway -->
+          <circle cx="32" cy="36" r="7" fill="currentColor" stroke="none" class="accent"/>
+          <!-- A few rays inside -->
+          <line x1="32" y1="20" x2="32" y2="25"/>
+          <line x1="20" y1="36" x2="22" y2="36"/>
+          <line x1="42" y1="36" x2="44" y2="36"/>
+          <line x1="22" y1="26" x2="24" y2="28"/>
+          <line x1="42" y1="26" x2="40" y2="28"/>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-name">Claude Buzizi Foundation</span>
+          <span class="logo-sub">Feed · Educate · Equip</span>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <span class="opt-tag">Threshold + dawn</span>
+        <div class="opt-id">Option 06</div>
+        <h3 class="opt-name">Doorway to a New Dawn</h3>
+      </div>
+      <div>
+        <p>An arched doorway with the Rwandan sun rising inside it. The doorway is the opportunity the Foundation creates; the sun is what's on the other side. Echoes the architecture of Rwandan rural homes (rounded arched doorways) without copying any one of them.</p>
+        <p><b>Why it works:</b> A doorway is the cleanest possible metaphor for "first chance." Combined with the sun, it reads as <em>walking into a new day</em>. Memorable as a silhouette and unique to your foundation.</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="logo small">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M 14 56 L 14 28 Q 14 8, 32 8 Q 50 8, 50 28 L 50 56" stroke-linejoin="round"/><line x1="8" y1="56" x2="56" y2="56" stroke-width="1"/><circle cx="32" cy="36" r="7" fill="currentColor" stroke="none" class="accent"/><line x1="32" y1="20" x2="32" y2="25"/><line x1="20" y1="36" x2="22" y2="36"/><line x1="42" y1="36" x2="44" y2="36"/><line x1="22" y1="26" x2="24" y2="28"/><line x1="42" y1="26" x2="40" y2="28"/></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Feed · Educate · Equip</span></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="logo small">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M 14 56 L 14 28 Q 14 8, 32 8 Q 50 8, 50 28 L 50 56" stroke-linejoin="round"/><line x1="8" y1="56" x2="56" y2="56" stroke-width="1"/><circle cx="32" cy="36" r="7" fill="currentColor" stroke="none" class="accent"/><line x1="32" y1="20" x2="32" y2="25"/><line x1="20" y1="36" x2="22" y2="36"/><line x1="42" y1="36" x2="44" y2="36"/><line x1="22" y1="26" x2="24" y2="28"/><line x1="42" y1="26" x2="40" y2="28"/></svg>
+        <span class="logo-text"><span class="logo-name">Claude Buzizi Foundation</span><span class="logo-sub">Feed · Educate · Equip</span></span>
+      </a>
+    </div>
+  </article>
+
+  <div class="pickrow">
+    <span class="bf-eyebrow no-rule" style="color: hsl(var(--bf-gold-soft));">My recommendation</span>
+    <h3>Option 03 (Dawn Over the Hills) for the brand. Option 01 (Pure Rwandan Sun) as the small-format mark.</h3>
+    <p>Dawn Over the Hills carries the most meaning per stroke: it names where the work began (Rwanda, Land of a Thousand Hills), what the work does (a new day rises), and lets us thread "Viscero · Kiwi · Rwanda" into the wordmark subtitle. The pure sun then becomes your favicon, app icon, and seal — small enough to read at 16px and instantly recognizable as the same brand.</p>
+    <p style="margin-top: 16px; color: hsl(var(--bf-gold-soft));">Tell me which option (or pairing) and I'll wire it into every page header and footer.</p>
+  </div>
+</div>
+
+</body>
+</html>

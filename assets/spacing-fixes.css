@@ -1,0 +1,48 @@
+/* Spacing & polish overrides — applied site-wide on top of foundation.css */
+
+/* Page hero: ensure single-column layout doesn't get awkward bottom alignment */
+.bf-page-hero-row { align-items: flex-start; }
+
+/* Reduce double padding when bf-page-hero is immediately followed by bf-section */
+.bf-page-hero + .bf-section { padding-top: 80px; }
+.bf-page-hero + .bf-partners-strip { padding-top: 56px; }
+
+/* Cards grids: enforce consistent gap across pages */
+.bf-cards { gap: 28px; }
+.bf-cards.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.bf-cards.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 980px) {
+  .bf-cards.cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .bf-cards.cols-2,
+  .bf-cards.cols-3 { grid-template-columns: 1fr; }
+}
+
+/* Numlist meta — let icons/text breathe; prevent vertical-align hop */
+.bf-numitem-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.bf-numitem-meta img { display: inline-block; flex: 0 0 auto; }
+
+/* Programs partner strip — extra polish */
+.bf-partners-strip .bf-partner-logo img { display: block; }
+
+/* Partners page: prevent collapsing partner tile heights */
+.bf-partners .bf-partner { min-height: 110px; display: grid; place-items: center; }
+
+/* Footer top margin breathing room (avoid abrupt jump after dense content) */
+.bf-footer { margin-top: 0; }
+
+/* Headings: tighten paragraph-after-heading rhythm site-wide */
+.bf-section h2 + p,
+.bf-section h3 + p { margin-top: 12px; }
+
+/* Page-hero: clamp h1 margin so eyebrow → h1 → p is tight */
+.bf-page-hero h1 { margin: 12px 0 16px; }
+.bf-page-hero p  { margin-top: 0; }
+
+/* Get-involved cards: align footer arrow at the bottom of every card */
+.bf-card { display: flex; flex-direction: column; }
+.bf-card .bf-card-foot { margin-top: auto; }
+
+/* Reports / 2-col: avoid one card stretching unevenly */
+.bf-cards.cols-2 .bf-card { height: 100%; }

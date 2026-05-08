@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Claude Application — Buzizi Foundation</title>
+<link rel="icon" href="assets/favicon.png" />
+<link rel="stylesheet" href="assets/foundation.css" />
+<link rel="stylesheet" href="assets/spacing-fixes.css" />
+</head>
+<body class="bf">
+<div data-shell="nav" data-active="application"></div>
+<section class="bf-page-hero">
+  <div class="bf-container">
+    <div class="bf-page-hero-row">
+      <div>
+        <span class="bf-eyebrow">Apply for Support</span>
+        <h1>The Claude <span class="bf-script">Application.</span></h1>
+        <p>For students seeking scholarships, families requesting meal support through our Rise Against Hunger pipeline, and applicants for our coaching and masterclass programs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bf-section">
+  <div class="bf-container" style="max-width: 760px;">
+    <div style="background: hsl(var(--bf-ivory)); border: 1px solid hsl(var(--bf-rule)); border-radius: 22px; padding: 40px; box-shadow: var(--bf-shadow-card);">
+      <form class="bf-form" id="app-form">
+        <div class="bf-field">
+          <label class="bf-label" for="apptype">Type of support</label>
+          <select class="bf-select" id="apptype">
+            <option>Educate — Scholarship application</option>
+            <option>Educate — Sponsored masterclass seat</option>
+            <option>Equip — Coaching & Earning Blueprints access</option>
+            <option>Feed — Community partner referral</option>
+          </select>
+        </div>
+        <div class="bf-field-row">
+          <div class="bf-field"><label class="bf-label">Full Name</label><input class="bf-input" required /></div>
+          <div class="bf-field"><label class="bf-label">Age</label><input class="bf-input" type="number" /></div>
+        </div>
+        <div class="bf-field"><label class="bf-label">Email</label><input class="bf-input" type="email" required /></div>
+        <div class="bf-field"><label class="bf-label">City / Country</label><input class="bf-input" required /></div>
+        <div class="bf-field"><label class="bf-label">Tell us your story</label><textarea class="bf-textarea" placeholder="In your own words, share your situation and what kind of support would change things for you..." required></textarea></div>
+        <div class="bf-field"><label class="bf-label">Referred by (optional)</label><input class="bf-input" /></div>
+        <button class="bf-btn bf-btn-primary bf-btn-lg" type="submit" style="justify-content: center;">Submit Application</button>
+        <p style="font-size: 13px; color: var(--page-fg-soft); text-align: center; margin: 0;">We review every application within 14 days. Confidentiality is our default.</p>
+      </form>
+    </div>
+  </div>
+</section>
+<div data-shell="footer"></div>
+<script src="assets/shell.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+<script type="text/babel" src="assets/tweaks-controller.jsx"></script>
+<script>document.getElementById("app-form").addEventListener("submit",e=>{e.preventDefault();alert("Application received. We'll be in touch within 14 days.");e.target.reset();});</script>
+</body>
+</html>

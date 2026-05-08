@@ -1,0 +1,202 @@
+/* Claude Buzizi Design System — Colors, Type, Tokens */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Caveat:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* -- Brand Colors (HSL components, use with hsl()) -- */
+  --cb-deep-navy: 222 84% 4%;     /* hsl(222 84% 4%) — primary background */
+  --cb-dark-navy: 230 35% 7%;     /* card / surface */
+  --cb-midnight: 225 39% 10%;     /* slightly raised surface */
+  --cb-steel: 220 13% 18%;        /* borders, dividers */
+  --cb-brand-orange: 16 94% 58%;  /* primary action / accent */
+  --cb-brand-red: 8 86% 58%;      /* hot accent / CTA end */
+  --cb-warm-orange: 25 95% 63%;   /* secondary warm */
+  --cb-golden: 45 100% 68%;       /* highlights, secondary CTA */
+  --cb-success: 142 71% 45%;
+  --cb-warning: 38 92% 50%;
+  --cb-light-gray: 220 9% 46%;    /* body text on dark */
+  --cb-cream: 45 29% 97%;         /* foreground / headings */
+  --cb-pure-white: 0 0% 100%;
+
+  /* -- Forbes-Style "Book" Palette (alt light palette for books, press) -- */
+  --book-navy: 212 65% 15%;
+  --book-gold: 43 74% 52%;
+  --book-burgundy: 0 100% 27%;
+  --book-charcoal: 0 0% 11%;
+  --book-white: 0 0% 100%;
+  --book-gray-50: 0 0% 98%;
+  --book-gray-100: 220 13% 97%;
+  --book-gray-600: 215 14% 45%;
+  --book-gray-900: 222 47% 11%;
+
+  /* -- Resolved color tokens (ready to drop into color:) -- */
+  --bg:            hsl(var(--cb-deep-navy));
+  --bg-raised:     hsl(var(--cb-dark-navy));
+  --bg-elevated:   hsl(var(--cb-midnight));
+  --surface:       hsl(var(--cb-midnight));
+  --fg:            hsl(var(--cb-cream));
+  --fg-muted:      hsl(var(--cb-light-gray));
+  --fg-on-brand:   hsl(var(--cb-deep-navy));
+  --border:        hsl(230 20% 18%);
+  --border-strong: hsla(0 0% 100% / 0.2);
+  --border-glass:  hsla(0 0% 100% / 0.1);
+  --primary:       hsl(var(--cb-brand-orange));
+  --accent:        hsl(var(--cb-golden));
+  --danger:        hsl(var(--cb-brand-red));
+  --success:       hsl(var(--cb-success));
+  --warning:       hsl(var(--cb-warning));
+
+  /* -- Signature Gradients -- */
+  --gradient-hero:      linear-gradient(135deg, hsl(var(--cb-deep-navy)), hsl(var(--cb-midnight)));
+  --gradient-primary:   linear-gradient(135deg, hsl(var(--cb-brand-orange)), hsl(var(--cb-brand-red)));
+  --gradient-secondary: linear-gradient(135deg, hsl(var(--cb-golden)), hsl(var(--cb-warm-orange)));
+  --gradient-button-hover: linear-gradient(135deg, hsl(var(--cb-brand-orange)), hsl(var(--cb-golden)));
+  --gradient-glow:      radial-gradient(circle at center, hsl(var(--cb-brand-orange) / 0.3), transparent 70%);
+  --gradient-glass:     linear-gradient(135deg, rgba(255,107,53,0.1), rgba(255,75,31,0.05));
+  --gradient-text-brand: linear-gradient(135deg, hsl(var(--cb-brand-orange)), hsl(var(--cb-golden)));
+
+  /* -- Shadows & Glows -- */
+  --shadow-card:         0 4px 20px -4px hsl(var(--cb-deep-navy) / 0.2);
+  --shadow-elevation:    0 8px 30px -6px hsl(var(--cb-deep-navy) / 0.3);
+  --shadow-button:       0 4px 15px -3px hsl(var(--cb-brand-orange) / 0.4);
+  --shadow-button-hover: 0 8px 25px -5px hsl(var(--cb-brand-orange) / 0.6);
+  --shadow-brand:        0 20px 40px -12px hsl(var(--cb-brand-orange) / 0.4);
+  --shadow-brand-hover:  0 25px 50px -12px hsl(var(--cb-brand-orange) / 0.6);
+  --glow-primary:        0 0 30px hsl(var(--cb-brand-orange) / 0.5);
+  --glow-secondary:      0 0 20px hsl(var(--cb-golden) / 0.4);
+
+  /* -- Glass Morphism -- */
+  --glass-bg: rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.1);
+  --glass-backdrop: blur(10px);
+
+  /* -- Radii -- */
+  --radius-sm: 0.5rem;   /* 8px */
+  --radius-md: 0.625rem; /* 10px */
+  --radius-lg: 0.75rem;  /* 12px — default --radius */
+  --radius-xl: 1rem;     /* 16px — glass-premium */
+  --radius-2xl: 1.5rem;  /* 24px — liquid-glass */
+  --radius-pill: 9999px;
+  --radius: var(--radius-lg);
+
+  /* -- Spacing scale (tailwind-aligned) -- */
+  --space-1: 0.25rem;   /* 4 */
+  --space-2: 0.5rem;    /* 8 */
+  --space-3: 0.75rem;   /* 12 */
+  --space-4: 1rem;      /* 16 */
+  --space-6: 1.5rem;    /* 24 */
+  --space-8: 2rem;      /* 32 */
+  --space-12: 3rem;     /* 48 */
+  --space-16: 4rem;     /* 64 */
+  --space-20: 5rem;     /* 80 */
+
+  /* -- Motion -- */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-fluid: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+  --dur-slow: 600ms;
+  --transition-smooth: all var(--dur-base) var(--ease-smooth);
+  --transition-spring: all var(--dur-slow) var(--ease-spring);
+
+  /* -- Typography Families -- */
+  --font-sans:    'Quicksand', system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-brand:   'Quicksand', system-ui, sans-serif;      /* UI / body */
+  --font-display: 'Fraunces', 'Playfair Display', Georgia, serif; /* H1-H6, editorial */
+  --font-heading: var(--font-display);
+  --font-accent:  'Caveat', cursive;                       /* hero name, signatures, pull quotes */
+
+  /* -- Type Scale (1920-desktop baseline) -- */
+  --fs-display: clamp(3rem, 6vw, 5rem);     /* 48-80 — hero */
+  --fs-h1: clamp(2.25rem, 4vw, 3.75rem);    /* 36-60 */
+  --fs-h2: clamp(1.875rem, 3vw, 3rem);      /* 30-48 */
+  --fs-h3: 1.875rem;                        /* 30 */
+  --fs-h4: 1.5rem;                          /* 24 */
+  --fs-h5: 1.25rem;                         /* 20 */
+  --fs-h6: 1.125rem;                        /* 18 */
+  --fs-lg:  1.25rem;                        /* 20 — lead */
+  --fs-base: 1rem;                          /* 16 — body */
+  --fs-sm: 0.875rem;                        /* 14 */
+  --fs-xs: 0.75rem;                         /* 12 — caption */
+}
+
+/* -- Kit compatibility aliases (names used by ui_kits/website/kit.css) -- */
+:root {
+  /* HSL triplets that kit.css wraps in hsl(...) */
+  --cb-foreground:         var(--cb-cream);
+  --cb-primary-foreground: var(--cb-deep-navy);
+  --cb-gray:               var(--cb-light-gray);
+  --cb-navy:               var(--cb-deep-navy);
+  --cb-charcoal:           230 25% 9%;
+  --cb-red-orange:         var(--cb-brand-red);
+  /* gradient / shadow / motion / radius / font / blur aliases */
+  --cb-gradient-brand:     var(--gradient-primary);
+  --cb-gradient-hero:      var(--gradient-hero);
+  --cb-gradient-warm:      var(--gradient-secondary);
+  --cb-gradient-glass:     var(--gradient-glass);
+  --cb-shadow-button:      var(--shadow-button);
+  --cb-shadow-button-hover:var(--shadow-button-hover);
+  --cb-shadow-elevation:   var(--shadow-elevation);
+  --cb-shadow-brand:       var(--shadow-brand);
+  --cb-shadow-brand-hover: var(--shadow-brand-hover);
+  --cb-transition-smooth:  var(--transition-smooth);
+  --cb-radius:             var(--radius);
+  --cb-backdrop-blur:      var(--glass-backdrop);
+  --cb-font-sans:          var(--font-sans);
+  --cb-font-brand:         var(--font-brand);
+  --cb-font-serif:         var(--font-display);
+  --cb-font-accent:        var(--font-accent);
+}
+
+/* -- Base elements -- */
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga' 1, 'kern' 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variation-settings: "opsz" 96, "SOFT" 50;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  padding-bottom: 0.08em;     /* reserves descender space for bg-clip text */
+  text-rendering: optimizeLegibility;
+  margin: 0 0 var(--space-4) 0;
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+h6 { font-size: var(--fs-h6); }
+
+p { margin: 0 0 var(--space-4) 0; color: var(--fg-muted); }
+small, .caption { font-size: var(--fs-xs); color: var(--fg-muted); }
+
+.font-accent { font-family: var(--font-accent); font-weight: 500; }
+.font-display { font-family: var(--font-display); }
+.font-brand   { font-family: var(--font-brand); }
+
+.text-gradient-brand {
+  background: var(--gradient-text-brand);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid hsl(var(--cb-brand-orange));
+  outline-offset: 2px;
+  border-radius: 4px;
+}

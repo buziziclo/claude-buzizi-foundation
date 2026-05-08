@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logo Lab v4 — Wordmark-led</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/foundation.css" />
+<link rel="stylesheet" href="assets/spacing-fixes.css" />
+<style>
+  body { background: #f4f1ea; }
+  .lab { max-width: 1280px; margin: 0 auto; padding: 72px 32px 120px; }
+  .lab-head { max-width: 780px; margin-bottom: 48px; }
+  .lab-head h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); letter-spacing: -0.025em; margin: 12px 0 16px; line-height: 1.05; }
+  .lab-head p { font-size: 17px; color: var(--page-fg-muted); line-height: 1.65; }
+  .lab-head p + p { margin-top: 12px; }
+
+  .opt {
+    background: white;
+    border: 1px solid hsl(var(--bf-rule));
+    border-radius: 20px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .opt-meta {
+    padding: 22px 40px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    align-items: center;
+    border-bottom: 1px solid hsl(var(--bf-rule));
+  }
+  .opt-id { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bf-accent); margin-bottom: 4px; font-weight: 700; }
+  .opt-name { font-family: var(--font-display); font-size: 22px; letter-spacing: -0.015em; line-height: 1.15; margin: 0; }
+  .opt-meta p { font-size: 14.5px; line-height: 1.6; color: var(--page-fg-muted); margin: 0; }
+
+  /* The four contexts: real header, real header dark, large hero, favicon */
+  .ctx { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: hsl(var(--bf-rule)); }
+  .ctx > div {
+    padding: 28px 24px;
+    background: #fafaf6;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 110px;
+    gap: 10px;
+  }
+  .ctx > div.dark { background: hsl(220 25% 9%); }
+  .ctx > div.large { background: white; min-height: 160px; padding: 32px; }
+  .ctx > div.fav  { background: #f0ece2; align-items: center; justify-content: center; }
+  .ctx-label { font-family: 'Inter', sans-serif; font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: hsl(var(--bf-ink) / 0.45); }
+  .ctx > div.dark .ctx-label { color: hsl(var(--bf-gold-soft) / 0.7); }
+
+  /* ============================================================ */
+  /* SHARED LOGO PRIMITIVES                                        */
+  /* ============================================================ */
+  .lg { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+  .lg .mark { flex-shrink: 0; display: block; }
+  .lg .text { display: flex; flex-direction: column; gap: 3px; line-height: 1; }
+
+  /* Small (header) */
+  .lg.s .mark { width: 32px; height: 32px; }
+  .lg.s .name { font-size: 14px; }
+  .lg.s .sub  { font-size: 8.5px; }
+
+  /* Large (hero/wordmark presentation) */
+  .lg.l { gap: 18px; }
+  .lg.l .mark { width: 56px; height: 56px; }
+  .lg.l .name { font-size: 28px; }
+  .lg.l .sub  { font-size: 12px; }
+
+  /* Favicon size */
+  .lg.fv .mark { width: 44px; height: 44px; }
+
+  /* ============================================================ */
+  /* WORDMARK STYLES — different type systems                     */
+  /* ============================================================ */
+  /* A: Archivo black/heavy, ultra-tight tracking — institutional */
+  .wm-archivo .name {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink));
+    line-height: 1;
+  }
+  .wm-archivo .sub {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.65);
+  }
+
+  /* B: Inter heavy + lighter sub — modern editorial */
+  .wm-inter .name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink));
+    line-height: 1;
+  }
+  .wm-inter .sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.6);
+  }
+
+  /* C: Fraunces display serif — heritage / foundation grammar */
+  .wm-fraunces .name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-variation-settings: 'opsz' 144;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink));
+    line-height: 1;
+  }
+  .wm-fraunces .sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.6);
+  }
+
+  /* D: Stacked single-line — Foundation alongside, separated by rule */
+  .wm-rule .name {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink));
+    line-height: 1;
+  }
+  .wm-rule .sub-row { display: flex; align-items: center; gap: 10px; }
+  .wm-rule .sub-rule { width: 18px; height: 1.5px; background: hsl(var(--bf-ink) / 0.4); }
+  .wm-rule .sub {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.65);
+  }
+
+  /* COLOR VARIANT: orange name, black foundation */
+  .lg.color-split .name { color: var(--bf-accent); }
+  .lg.color-split .sub  { color: hsl(var(--bf-ink)); font-weight: 600; }
+  .lg.color-split .sub-rule { background: hsl(var(--bf-ink) / 0.6); }
+
+  /* DARK CONTEXT */
+  .dark .lg .name { color: white; }
+  .dark .lg .sub  { color: hsl(var(--bf-gold-soft) / 0.85); }
+  .dark .lg .sub-rule { background: hsl(var(--bf-gold-soft) / 0.5); }
+  .dark .lg.color-split .name { color: hsl(var(--bf-gold)); }
+  .dark .lg.color-split .sub  { color: white; }
+
+  /* ============================================================ */
+  /* RECOMMENDATION FOOTER                                         */
+  /* ============================================================ */
+  .pickrow {
+    background: hsl(var(--bf-ink));
+    color: white;
+    padding: 36px 48px;
+    border-radius: 20px;
+    margin-top: 36px;
+  }
+  .pickrow h3 { font-family: var(--font-display); font-size: 24px; color: white; max-width: 760px; margin: 8px 0; }
+  .pickrow p { font-size: 15px; line-height: 1.6; max-width: 760px; color: hsl(0 0% 100% / 0.78); }
+</style>
+</head>
+<body class="bf">
+
+<div class="lab">
+  <header class="lab-head">
+    <span class="bf-eyebrow">Logo Lab — Round 4</span>
+    <h1>Wordmark-led. The name <em style="font-family: var(--font-script); font-style: normal; color: var(--bf-accent);">is</em> the logo.</h1>
+    <p>Reset. The strongest foundation logos — Ford, MacArthur, Hewlett, Open Society — lead with the wordmark and let the mark stay quiet. Round 3 had it backwards.</p>
+    <p>Six directions below. Each one is shown at <b>real working size</b> in four contexts: light header, dark footer, larger hero stamp, and a favicon-only crop. Decide on the system, not the artwork — pick the typographic <em>voice</em> first.</p>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- 01 — ARCHIVO + SUN MARK (color split)                         -->
+  <!-- ============================================================ -->
+  <article class="opt">
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 01</div>
+        <h3 class="opt-name">Archivo + Sun Mark</h3>
+      </div>
+      <p>Archivo Black for the name (institutional, modern, confident), small Rwandan-sun mark to the left. Heavy + small mark = serious nonprofit. Color split shown.</p>
+    </div>
+    <div class="ctx">
+      <div>
+        <span class="ctx-label">Header · Light</span>
+        <a class="lg s wm-archivo color-split">
+          <svg class="mark" viewBox="0 0 32 32"><circle cx="16" cy="16" r="5" fill="var(--bf-accent)"/><g stroke="hsl(var(--bf-ink))" stroke-width="1.2" stroke-linecap="round"><line x1="16" y1="3" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="29"/><line x1="3" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="29" y2="16"/><line x1="6.8" y1="6.8" x2="9" y2="9"/><line x1="23" y1="23" x2="25.2" y2="25.2"/><line x1="6.8" y1="25.2" x2="9" y2="23"/><line x1="23" y1="9" x2="25.2" y2="6.8"/></g></svg>
+          <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+        </a>
+      </div>
+      <div class="dark">
+        <span class="ctx-label">Footer · Dark</span>
+        <a class="lg s wm-archivo color-split">
+          <svg class="mark" viewBox="0 0 32 32"><circle cx="16" cy="16" r="5" fill="hsl(var(--bf-gold))"/><g stroke="white" stroke-width="1.2" stroke-linecap="round"><line x1="16" y1="3" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="29"/><line x1="3" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="29" y2="16"/><line x1="6.8" y1="6.8" x2="9" y2="9"/><line x1="23" y1="23" x2="25.2" y2="25.2"/><line x1="6.8" y1="25.2" x2="9" y2="23"/><line x1="23" y1="9" x2="25.2" y2="6.8"/></g></svg>
+          <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+        </a>
+      </div>
+      <div class="large">
+        <span class="ctx-label">Hero stamp</span>
+        <a class="lg l wm-archivo color-split">
+          <svg class="mark" viewBox="0 0 32 32"><circle cx="16" cy="16" r="5" fill="var(--bf-accent)"/><g stroke="hsl(var(--bf-ink))" stroke-width="1.2" stroke-linecap="round"><line x1="16" y1="3" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="29"/><line x1="3" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="29" y2="16"/><line x1="6.8" y1="6.8" x2="9" y2="9"/><line x1="23" y1="23" x2="25.2" y2="25.2"/><line x1="6.8" y1="25.2" x2="9" y2="23"/><line x1="23" y1="9" x2="25.2" y2="6.8"/></g></svg>
+          <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+        </a>
+      </div>
+      <div class="fav">
+        <span class="ctx-label">Favicon</span>
+        <a class="lg fv">
+          <svg class="mark" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="var(--bf-accent)"/><g stroke="hsl(var(--bf-ink))" stroke-width="1.4" stroke-linecap="round"><line x1="16" y1="3" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="29"/><line x1="3" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="29" y2="16"/><line x1="6.8" y1="6.8" x2="9" y2="9"/><line x1="23" y1="23" x2="25.2" y2="25.2"/><line x1="6.8" y1="25.2" x2="9" y2="23"/><line x1="23" y1="9" x2="25.2" y2="6.8"/></g></svg>
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- 02 — ARCHIVO + RULE (no mark, Ford Foundation grammar)        -->
+  <!-- ============================================================ -->
+  <article class="opt">
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 02</div>
+        <h3 class="opt-name">Archivo + Hairline Rule</h3>
+      </div>
+      <p>No mark. Wordmark-only with a thin hairline rule between "CLAUDE BUZIZI" and "FOUNDATION." Most premium-feeling — the grammar of Ford Foundation, MacArthur, Hewlett. Lets the name carry everything.</p>
+    </div>
+    <div class="ctx">
+      <div>
+        <span class="ctx-label">Header · Light</span>
+        <a class="lg s wm-rule color-split">
+          <span class="text">
+            <span class="name">Claude Buzizi</span>
+            <span class="sub-row"><span class="sub-rule"></span><span class="sub">Foundation</span></span>
+          </span>
+        </a>
+      </div>
+      <div class="dark">
+        <span class="ctx-label">Footer · Dark</span>
+        <a class="lg s wm-rule color-split">
+          <span class="text">
+            <span class="name">Claude Buzizi</span>
+            <span class="sub-row"><span class="sub-rule"></span><span class="sub">Foundation</span></span>
+          </span>
+        </a>
+      </div>
+      <div class="large">
+        <span class="ctx-label">Hero stamp</span>
+        <a class="lg l wm-rule color-split">
+          <span class="text">
+            <span class="name">Claude Buzizi</span>
+            <span class="sub-row"><span class="sub-rule" style="width: 24px;"></span><span class="sub">Foundation</span></span>
+          </span>
+        </a>
+      </div>
+      <div class="fav">
+        <span class="ctx-label">Favicon · CB</span>
+        <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 24px; color: var(--bf-accent); letter-spacing: -0.02em;">CB</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- 03 — INTER + SUN DOT (minimal accent)                         -->
+  <!-- ============================================================ -->
+  <article class="opt">
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 03</div>
+        <h3 class="opt-name">Inter + Sun Dot</h3>
+      </div>
+      <p>Inter Black. Tighter, more contemporary than Archivo — closer to a tech brand register. Mark reduced to a single solid disc (the source) plus four cardinal rays. Reads as a confident period at the start of the name.</p>
+    </div>
+    <div class="ctx">
+      <div>
+        <span class="ctx-label">Header · Light</span>
+        <a class="lg s wm-inter color-split" style="gap: 10px;">
+          <svg class="mark" viewBox="0 0 32 32" style="width:18px;height:18px;"><circle cx="16" cy="16" r="6" fill="var(--bf-accent)"/><g stroke="hsl(var(--bf-ink))" stroke-width="1.5" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>
+          <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+        </a>
+      </div>
+      <div class="dark">
+        <span class="ctx-label">Footer · Dark</span>
+        <a class="lg s wm-inter color-split" style="gap: 10px;">
+          <svg class="mark" viewBox="0 0 32 32" style="width:18px;height:18px;"><circle cx="16" cy="16" r="6" fill="hsl(var(--bf-gold))"/><g stroke="white" stroke-width="1.5" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>
+          <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+        </a>
+      </div>
+      <div class="large">
+        <span class="ctx-label">Hero stamp</span>
+        <a class="lg l wm-inter color-split" style="gap: 14px;">
+          <svg class="mark" viewBox="0 0 32 32" style="width:30px;height:30px;"><circle cx="16" cy="16" r="6" fill="var(--bf-accent)"/><g stroke="hsl(var(--bf-ink))" stroke-width="1.5" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>
+          <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+        </a>
+      </div>
+      <div class="fav">
+        <span class="ctx-label">Favicon</span>
+        <svg viewBox="0 0 32 32" style="width:32px;height:32px;"><circle cx="16" cy="16" r="9" fill="var(--bf-accent)"/><g stroke="hsl(var(--bf-ink))" stroke-width="1.8" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- 04 — FRAUNCES SERIF + RULE (heritage / foundation classic)    -->
+  <!-- ============================================================ -->
+  <article class="opt">
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 04</div>
+        <h3 class="opt-name">Fraunces Serif + Rule</h3>
+      </div>
+      <p>Fraunces (display serif) for the name, set in caps. Reads as <em>established institution</em>: museum, university press, foundation of record. Same hairline-rule treatment as Option 02. The orange becomes a literary accent, not a brand shout.</p>
+    </div>
+    <div class="ctx">
+      <div>
+        <span class="ctx-label">Header · Light</span>
+        <a class="lg s wm-fraunces color-split">
+          <span class="text">
+            <span class="name">Claude Buzizi</span>
+            <span class="sub-row"><span class="sub-rule"></span><span class="sub">Foundation</span></span>
+          </span>
+        </a>
+      </div>
+      <div class="dark">
+        <span class="ctx-label">Footer · Dark</span>
+        <a class="lg s wm-fraunces color-split">
+          <span class="text">
+            <span class="name">Claude Buzizi</span>
+            <span class="sub-row"><span class="sub-rule"></span><span class="sub">Foundation</span></span>
+          </span>
+        </a>
+      </div>
+      <div class="large">
+        <span class="ctx-label">Hero stamp</span>
+        <a class="lg l wm-fraunces color-split">
+          <span class="text">
+            <span class="name">Claude Buzizi</span>
+            <span class="sub-row"><span class="sub-rule" style="width: 24px;"></span><span class="sub">Foundation</span></span>
+          </span>
+        </a>
+      </div>
+      <div class="fav">
+        <span class="ctx-label">Favicon · CB</span>
+        <span style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 26px; color: var(--bf-accent); letter-spacing: 0.02em;">CB</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- 05 — STACKED, ALIGNED LEFT (no mark, Bauhaus grammar)         -->
+  <!-- ============================================================ -->
+  <article class="opt">
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 05</div>
+        <h3 class="opt-name">Stacked, Aligned</h3>
+      </div>
+      <p>"CLAUDE / BUZIZI / FOUNDATION" stacked on three lines, all flush-left, equal x-height across — but "FOUNDATION" set lighter and fully tracked so it reads as the descriptor. Strongest at hero size; quietest at header size.</p>
+    </div>
+    <div class="ctx">
+      <div>
+        <span class="ctx-label">Header · Light</span>
+        <a class="lg s" style="gap: 0;">
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 13px; line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; color: var(--bf-accent); display: block;">Claude<br/>Buzizi</span>
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 500; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: hsl(var(--bf-ink)); margin-left: 12px; padding-left: 12px; border-left: 1.5px solid hsl(var(--bf-ink) / 0.3); align-self: stretch; display: flex; align-items: center;">Foundation</span>
+        </a>
+      </div>
+      <div class="dark">
+        <span class="ctx-label">Footer · Dark</span>
+        <a class="lg s" style="gap: 0;">
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 13px; line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; color: hsl(var(--bf-gold)); display: block;">Claude<br/>Buzizi</span>
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 500; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: white; margin-left: 12px; padding-left: 12px; border-left: 1.5px solid hsl(var(--bf-gold-soft) / 0.5); align-self: stretch; display: flex; align-items: center;">Foundation</span>
+        </a>
+      </div>
+      <div class="large">
+        <span class="ctx-label">Hero stamp</span>
+        <a class="lg l" style="gap: 0;">
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 30px; line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; color: var(--bf-accent); display: block;">Claude<br/>Buzizi</span>
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.36em; text-transform: uppercase; color: hsl(var(--bf-ink)); margin-left: 20px; padding-left: 20px; border-left: 1.5px solid hsl(var(--bf-ink) / 0.3); align-self: stretch; display: flex; align-items: center;">Foundation</span>
+        </a>
+      </div>
+      <div class="fav">
+        <span class="ctx-label">Favicon · CB</span>
+        <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px; line-height: 0.92; color: var(--bf-accent); letter-spacing: 0; text-align: center;">CB</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- 06 — INLINE LEFT-RULE (orange tag-mark + black wordmark)      -->
+  <!-- ============================================================ -->
+  <article class="opt">
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 06</div>
+        <h3 class="opt-name">Tag Bar + Wordmark</h3>
+      </div>
+      <p>A solid orange vertical bar (a "tag" or "spine") sits to the left of the wordmark. Mechanical, editorial, very small footprint. The bar is the brand mark — no glyph, no figure. Most distinctive at favicon size.</p>
+    </div>
+    <div class="ctx">
+      <div>
+        <span class="ctx-label">Header · Light</span>
+        <a class="lg s" style="gap: 12px;">
+          <span style="width: 4px; height: 30px; background: var(--bf-accent); border-radius: 2px; flex-shrink: 0;"></span>
+          <span class="text">
+            <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; color: hsl(var(--bf-ink)); line-height: 1;">Claude Buzizi</span>
+            <span style="font-family: 'Archivo', sans-serif; font-weight: 500; font-size: 8.5px; letter-spacing: 0.34em; text-transform: uppercase; color: hsl(var(--bf-ink) / 0.6); line-height: 1; margin-top: 4px;">Foundation</span>
+          </span>
+        </a>
+      </div>
+      <div class="dark">
+        <span class="ctx-label">Footer · Dark</span>
+        <a class="lg s" style="gap: 12px;">
+          <span style="width: 4px; height: 30px; background: hsl(var(--bf-gold)); border-radius: 2px; flex-shrink: 0;"></span>
+          <span class="text">
+            <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; color: white; line-height: 1;">Claude Buzizi</span>
+            <span style="font-family: 'Archivo', sans-serif; font-weight: 500; font-size: 8.5px; letter-spacing: 0.34em; text-transform: uppercase; color: hsl(var(--bf-gold-soft) / 0.85); line-height: 1; margin-top: 4px;">Foundation</span>
+          </span>
+        </a>
+      </div>
+      <div class="large">
+        <span class="ctx-label">Hero stamp</span>
+        <a class="lg l" style="gap: 18px;">
+          <span style="width: 6px; height: 56px; background: var(--bf-accent); border-radius: 3px; flex-shrink: 0;"></span>
+          <span class="text">
+            <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: 0.02em; text-transform: uppercase; color: hsl(var(--bf-ink)); line-height: 1;">Claude Buzizi</span>
+            <span style="font-family: 'Archivo', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.36em; text-transform: uppercase; color: hsl(var(--bf-ink) / 0.6); line-height: 1; margin-top: 8px;">Foundation</span>
+          </span>
+        </a>
+      </div>
+      <div class="fav">
+        <span class="ctx-label">Favicon</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;">
+          <span style="width: 6px; height: 32px; background: var(--bf-accent); border-radius: 3px;"></span>
+          <span style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px; color: hsl(var(--bf-ink)); letter-spacing: -0.02em;">CB</span>
+        </span>
+      </div>
+    </div>
+  </article>
+
+  <div class="pickrow">
+    <span class="bf-eyebrow no-rule" style="color: hsl(var(--bf-gold-soft));">My recommendation</span>
+    <h3>Option 02 (Archivo + Hairline Rule) — wordmark-only, the grammar of every great foundation.</h3>
+    <p>It's the most legible at every size, ages best, and lets the brand carry meaning through the name and the work — not through a competing glyph. The hairline rule is the only mark, and it does what every great mark does: it disappears until you need it.</p>
+    <p style="margin-top: 14px; color: hsl(var(--bf-gold-soft));">Tell me which option and I'll wire it across every page.</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Claude Buzizi Foundation — Feed. Educate. Equip.</title>
+<link rel="icon" href="assets/favicon.png" />
+<link rel="stylesheet" href="assets/foundation.css" />
+<link rel="stylesheet" href="assets/spacing-fixes.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+/* Page-only motion hero animations */
+.bf-hero-art[data-mode="motion"] .bf-hero-portrait { animation: bfHeroZoom 22s ease-in-out infinite alternate; }
+.bf-hero-art[data-mode="motion"]::before {
+  content: "";
+  position: absolute; inset: -20%;
+  background:
+    radial-gradient(40% 60% at 30% 30%, hsl(var(--bf-orange) / 0.45), transparent 60%),
+    radial-gradient(40% 60% at 70% 70%, hsl(var(--bf-gold) / 0.55), transparent 60%),
+    radial-gradient(40% 60% at 50% 90%, hsl(var(--bf-burgundy) / 0.4), transparent 60%);
+  filter: blur(40px);
+  animation: bfHeroSwirl 18s linear infinite;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+.bf-hero-art[data-mode="motion"]::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, transparent 30%, hsl(var(--bf-navy-deep) / 0.7) 100%);
+  z-index: 2;
+}
+.bf-hero-art[data-mode="motion"] .bf-hero-portrait { z-index: 0; opacity: 0.85; filter: saturate(0.9) contrast(1.05); }
+.bf-hero-art[data-mode="motion"] .bf-hero-art-stamp { z-index: 3; }
+.bf-hero-art[data-mode="motion"] .bf-hero-art-scrim { display: none; }
+
+@keyframes bfHeroZoom {
+  0%   { transform: scale(1.08) translate(0, 0); }
+  100% { transform: scale(1.18) translate(-2%, -3%); }
+}
+@keyframes bfHeroSwirl {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Video mode: shows drag-and-drop slot */
+.bf-hero-art[data-mode="video"] .bf-hero-portrait { display: none; }
+.bf-hero-art[data-mode="video"] .bf-hero-art-scrim { display: none; }
+.bf-hero-art[data-mode="video"] .bf-hero-video-slot {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, hsl(var(--bf-paper)), hsl(var(--bf-cream)));
+  color: var(--page-fg-soft);
+  text-align: center;
+  padding: 32px;
+  border: 2px dashed hsl(var(--bf-rule-strong));
+  border-radius: 28px;
+}
+.bf-hero-art[data-mode="video"] .bf-hero-video-slot strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--page-fg);
+  margin-bottom: 8px;
+}
+
+.bf-hero-art .bf-hero-video-slot { display: none; }
+.bf-hero-art[data-mode="video"] .bf-hero-video-slot { display: grid; }
+
+/* Mission band */
+.bf-mission {
+  padding: 120px 0;
+  background:
+    radial-gradient(80% 100% at 50% 0%, hsl(var(--bf-gold-soft) / 0.18), transparent 60%),
+    hsl(var(--bf-cream));
+}
+.bf-mission-inner { max-width: 920px; margin: 0 auto; text-align: center; }
+.bf-mission h2 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  margin: 18px 0 0;
+  line-height: 1.1;
+}
+.bf-mission h2 em {
+  font-style: italic;
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 96, "SOFT" 50;
+  background: var(--bf-accent-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 500;
+}
+
+/* Pillars row */
+.bf-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 980px) { .bf-pillars { grid-template-columns: 1fr; } }
+
+/* Story slider */
+.bf-stories-wrap { position: relative; }
+.bf-stories {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 4px 0 12px;
+  margin: 0 -8px;
+  padding-left: 8px; padding-right: 8px;
+}
+.bf-stories::-webkit-scrollbar { display: none; }
+.bf-story {
+  flex: 0 0 calc((100% - 48px) / 3);
+  scroll-snap-align: start;
+  background: hsl(var(--bf-ivory));
+  border: 1px solid hsl(var(--bf-rule));
+  border-radius: 22px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+@media (max-width: 980px) { .bf-story { flex-basis: calc((100% - 24px) / 2); } }
+@media (max-width: 640px)  { .bf-story { flex-basis: 88%; } }
+.bf-story-img {
+  width: 100%;
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+  background-color: hsl(var(--bf-cream));
+}
+.bf-story-body { padding: 26px 28px 30px; flex: 1; display: flex; flex-direction: column; }
+.bf-story-tag {
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bf-accent);
+  margin-bottom: 12px;
+}
+.bf-story h3 { font-size: 22px; margin-bottom: 10px; }
+
+/* Slider controls */
+.bf-slider-ctrls {
+  display: flex; gap: 10px; align-items: center;
+  margin-top: 24px;
+}
+.bf-slider-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid hsl(var(--bf-rule));
+  background: hsl(var(--bf-ivory));
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: hsl(var(--bf-ink));
+  transition: all 0.18s ease;
+}
+.bf-slider-btn:hover { background: hsl(var(--bf-orange)); color: white; border-color: hsl(var(--bf-orange)); transform: translateY(-1px); }
+.bf-slider-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; background: hsl(var(--bf-ivory)); color: hsl(var(--bf-ink)); border-color: hsl(var(--bf-rule)); }
+.bf-slider-btn svg { width: 18px; height: 18px; }
+.bf-slider-dots {
+  display: flex; gap: 8px; margin-left: 10px;
+}
+.bf-slider-dot {
+  width: 28px; height: 4px;
+  border-radius: 2px;
+  background: hsl(var(--bf-rule));
+  border: none; padding: 0; cursor: pointer;
+  transition: all 0.2s ease;
+}
+.bf-slider-dot.active { background: hsl(var(--bf-orange)); width: 44px; }
+
+/* Founder strip */
+.bf-founder {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 980px) { .bf-founder { grid-template-columns: 1fr; gap: 40px; } }
+.bf-founder-img {
+  aspect-ratio: 4/5;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 30px 60px -20px hsl(var(--bf-ink) / 0.25);
+}
+.bf-founder-img img { width: 100%; height: 100%; object-fit: cover; }
+.bf-founder-sig {
+  position: absolute;
+  bottom: 22px; left: 22px; right: 22px;
+  color: white;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+}
+.bf-founder-sig .bf-script { font-size: 56px; }
+
+/* Field gallery */
+.bf-field {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  height: 640px;
+}
+@media (max-width: 980px) {
+  .bf-field { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 280px); height: auto; }
+  .bf-field-tall { grid-column: span 2; }
+}
+.bf-field-cell {
+  position: relative; overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid hsl(var(--bf-rule));
+  background-size: cover; background-position: center;
+}
+.bf-field-tall { grid-row: span 2; }
+.bf-field-cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 22px 24px;
+  background: linear-gradient(to top, rgba(20,18,15,0.85) 0%, rgba(20,18,15,0.55) 60%, transparent 100%);
+  color: white;
+}
+.bf-field-cap small {
+  display: block;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  font-weight: 600; color: hsl(var(--bf-gold));
+  margin-bottom: 6px;
+}
+.bf-field-cap strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 20px; line-height: 1.25;
+  display: block;
+}
+.bf-field-rise {
+  position: absolute; top: 16px; right: 16px;
+  background: white; padding: 8px 12px;
+  border-radius: 8px;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+.bf-field-rise img { height: 22px; display: block; }
+.bf-founder-sig small {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+/* Pull quote */
+.bf-pull {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+  color: var(--page-fg);
+  text-wrap: balance;
+  font-style: italic;
+}
+</style>
+</head>
+<body class="bf">
+
+<div data-shell="nav" data-active="home"></div>
+
+<main>
+  <!-- ========== HERO ========== -->
+  <section class="bf-hero" data-screen-label="01 Home Hero">
+    <div class="bf-hero-bg"></div>
+    <div class="bf-hero-orbs">
+      <div class="bf-hero-orb a"></div>
+      <div class="bf-hero-orb b"></div>
+      <div class="bf-hero-orb c"></div>
+    </div>
+    <div class="bf-hero-grain"></div>
+
+    <div class="bf-hero-inner">
+      <div>
+        <span class="bf-eyebrow" data-tone-target="hero_eyebrow">The Claude Buzizi Foundation</span>
+        <h1 class="bf-hero-h1">
+          <span class="bf-line-1"><span data-tone-target="hero_h1_pre">Restoring</span> <span class="bf-script" data-tone-target="hero_h1_script">Hope</span></span>
+          <span class="bf-line-2" data-tone-target="hero_h1_post">in every life we touch.</span>
+        </h1>
+        <p class="bf-hero-lead" data-tone-target="hero_lead">
+          A foundation built on a promise — to carry forward the work my late father, Claver Buzizi, began for the widows and families of Bisesero after the 1994 Genocide against the Tutsi. Today that work has no borders: meals, scholarships, and the skills to earn — wherever a life can be changed.
+        </p>
+        <div class="bf-hero-ctas">
+          <a class="bf-btn bf-btn-primary bf-btn-lg" href="giving.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Donate Now
+          </a>
+          <a class="bf-btn bf-btn-ghost bf-btn-lg" href="about.html">
+            Our Story
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div style="display:flex; gap: 14px; margin-top: 28px; flex-wrap: wrap;">
+          <span class="bf-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Tax-deductible
+          </span>
+          <span class="bf-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            100% to programs
+          </span>
+          <span class="bf-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Donorbox secured
+          </span>
+        </div>
+      </div>
+
+      <div class="bf-hero-art" data-mode="motion" id="bf-hero-art">
+        <img class="bf-hero-portrait" src="assets/claude-pro.png" alt="Claude Buzizi, Founder" />
+        <div class="bf-hero-art-scrim"></div>
+        <div class="bf-hero-video-slot">
+          <div>
+            <strong>Hero video slot</strong>
+            <span>Drop a 1080p MP4 named <code>hero.mp4</code> in <code>/assets</code> and switch this hero to "video" via Tweaks.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS ========== -->
+  <section data-screen-label="02 Impact Stats">
+    <div class="bf-container">
+      <div class="bf-stats">
+        <div class="bf-stat">
+          <div class="bf-stat-num">—</div>
+          <div class="bf-stat-label">Lives Touched</div>
+        </div>
+        <div class="bf-stat">
+          <div class="bf-stat-num">—</div>
+          <div class="bf-stat-label">Meals Funded</div>
+        </div>
+        <div class="bf-stat">
+          <div class="bf-stat-num">—</div>
+          <div class="bf-stat-label">Communities Served</div>
+        </div>
+        <div class="bf-stat">
+          <div class="bf-stat-num">100<span class="suffix">%</span></div>
+          <div class="bf-stat-label">To Programs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MISSION ========== -->
+  <section class="bf-mission" data-screen-label="03 Mission">
+    <div class="bf-container">
+      <div class="bf-mission-inner">
+        <span class="bf-eyebrow no-rule">Our Mission</span>
+        <h2>
+          To be a <em>source of warmth</em> — feeding, teaching, and equipping — and to <em>gather</em> around it the people who have been kept furthest from it, until each of them turns to face someone newer to the dark.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PILLARS ========== -->
+  <section class="bf-section" data-screen-label="04 Pillars">
+    <div class="bf-container">
+      <div class="bf-section-head">
+        <span class="bf-eyebrow">Three Rays</span>
+        <h2>Feed today. Educate tomorrow. <span class="bf-grad-text">Equip for life.</span></h2>
+        <p>Three rays from one source. Every dollar puts a meal on a table, a student in a classroom, or the skills of an earner in the hands of someone who has never had them — and every person we reach becomes a ray for the next.</p>
+      </div>
+
+      <div class="bf-pillars">
+        <article class="bf-card">
+          <div class="bf-card-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <h3>Feed</h3>
+          <p>In partnership with Rise Against Hunger, every $1 directed to this pillar puts <b>20 meals</b> on the table of a family facing food insecurity. Direct, measurable, immediate.</p>
+          <div class="bf-card-foot">
+            $1 = 20 meals
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </article>
+
+        <article class="bf-card">
+          <div class="bf-card-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Educate</h3>
+          <p>Scholarships and masterclass access for underserved youth — wherever they are. A student in Bisesero, in Nairobi, or anywhere a child has the talent but not the doorway, gets the same shot at the classroom.</p>
+          <div class="bf-card-foot">
+            Scholarships & Masterclass Seats
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </article>
+
+        <article class="bf-card">
+          <div class="bf-card-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>Equip</h3>
+          <p>The same coaching and Earning Blueprints curriculum Claude used to escape 13-hour factory shifts — placed in the hands of beneficiaries so today's recipient becomes tomorrow's giver.</p>
+          <div class="bf-card-foot">
+            Coaching & Earning Blueprints
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STORIES ========== -->
+  <section class="bf-section alt" data-screen-label="05 Stories">
+    <div class="bf-container">
+      <div class="bf-section-head" style="display:flex; align-items: end; justify-content: space-between; gap: 32px; max-width: none; flex-wrap: wrap;">
+        <div style="max-width: 620px;">
+          <span class="bf-eyebrow">Stories of Hope</span>
+          <h2>The faces behind <span class="bf-grad-text">every dollar</span></h2>
+          <p>Names changed, dignity intact. Here are three of the people whose lives shifted because someone gave.</p>
+        </div>
+        <a class="bf-btn bf-btn-ghost" href="programs.html">
+          Read more stories
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="bf-stories-wrap">
+        <div class="bf-stories" id="bf-stories-track">
+          <article class="bf-story">
+            <div class="bf-story-img" style="background-image: url('assets/photos/girl-school-meal.png');"></div>
+            <div class="bf-story-body">
+              <span class="bf-story-tag">Educate · School Meals</span>
+              <h3>A meal, a uniform, a seat in the classroom.</h3>
+              <p>School-meal programs are the doorway. A child who eats can learn — and a child who learns becomes the next generation of givers. The Foundation funds the doorway, the desk, and everything in between.</p>
+              <div class="bf-card-foot" style="border-color: hsl(var(--bf-rule)); margin-top: auto;">
+                Read more on Programs
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </div>
+          </article>
+
+          <article class="bf-story">
+            <div class="bf-story-img" style="background-image: url('assets/photos/children-rice-bags.png');"></div>
+            <div class="bf-story-body">
+              <span class="bf-story-tag" style="display:flex; align-items:center; gap:10px;"><img src="assets/photos/rise-against-hunger-logo.png" alt="Rise Against Hunger" style="height: 18px; width: auto;"/> Feed · Rise Against Hunger</span>
+              <h3>Every $1 — 20 meals on a table.</h3>
+              <p>In partnership with Rise Against Hunger, donors and Earning Blueprints subscribers funnel meals into communities facing the highest rates of food insecurity. Children carry the rice home; families eat that night.</p>
+            </div>
+          </article>
+
+          <article class="bf-story">
+            <div class="bf-story-img" style="background-image: url('assets/photos/power-of-education.png');"></div>
+            <div class="bf-story-body">
+              <span class="bf-story-tag">Equip · Education</span>
+              <h3>Empowering generations with the power of education.</h3>
+              <p>Creating scholars. Breaking the poverty cycle. The same coaching and curriculum Claude built his own income on — placed in the hands of the next generation of givers.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="bf-slider-ctrls">
+          <button class="bf-slider-btn" id="bf-stories-prev" aria-label="Previous stories">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="bf-slider-btn" id="bf-stories-next" aria-label="Next stories">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div class="bf-slider-dots" id="bf-stories-dots"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOUNDER ========== -->
+  <section class="bf-section" data-screen-label="06 Founder">
+    <div class="bf-container">
+      <div class="bf-founder">
+        <div class="bf-founder-img">
+          <img src="assets/claude-2026.jpg" alt="Claude Buzizi, Founder" />
+          <div class="bf-founder-sig">
+            <span class="bf-script">Claude Buzizi</span>
+            <small>Founder & CEO</small>
+          </div>
+        </div>
+        <div>
+          <span class="bf-eyebrow">A note from the founder</span>
+          <h2 style="font-size: clamp(32px, 4vw, 48px); margin-top: 16px;">"This Foundation is a promise I made to my late father — and to every widow, every child, every family he set out to help."</h2>
+          <p style="font-size: 18px; line-height: 1.65; margin-top: 24px;">My father, Claver Buzizi, started a non-charity project in his village of Bisesero (Kibuye) after the 1994 Genocide against the Tutsi — quietly helping widows and families in need. I was born in Rwanda, did my schooling through P3 in Nairobi where the Maasai taught me resilience, and later moved to Belgium where I finally built the income engine I needed to carry his work forward.</p>
+          <p style="font-size: 18px; line-height: 1.65;">The Foundation takes that promise global. The only success worth keeping is the kind that gathers.</p>
+          <a class="bf-btn bf-btn-ghost bf-btn-lg" href="about.html" style="margin-top: 16px;">
+            Read the full story
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FIELD GALLERY ========== -->
+  <section class="bf-section alt" data-screen-label="07 From the Field">
+    <div class="bf-container">
+      <div class="bf-section-head">
+        <span class="bf-eyebrow">From the Field</span>
+        <h2>The work, in the <span class="bf-grad-text">faces it serves.</span></h2>
+        <p>Photographs from our partner programs and the communities we serve. Every dollar lands here.</p>
+      </div>
+
+      <div class="bf-field" style="margin-top: 40px;">
+        <div class="bf-field-cell bf-field-tall" style="background-image: url('assets/photos/girl-school-meal.png');">
+          <div class="bf-field-cap">
+            <small>Educate · School-Meal Program</small>
+            <strong>A meal at school is a doorway to a future.</strong>
+          </div>
+        </div>
+        <div class="bf-field-cell" style="background-image: url('assets/photos/children-rice-bags.png');">
+          <div class="bf-field-rise"><img src="assets/photos/rise-against-hunger-logo.png" alt="Rise Against Hunger"/></div>
+          <div class="bf-field-cap">
+            <small>Feed · Distribution Day</small>
+            <strong>Rice carried home, families fed that night.</strong>
+          </div>
+        </div>
+        <div class="bf-field-cell" style="background-image: url('assets/photos/power-of-education.png');">
+          <div class="bf-field-cap">
+            <small>Equip · The Power of Education</small>
+            <strong>Creating scholars. Breaking the poverty cycle.</strong>
+          </div>
+        </div>
+        <div class="bf-field-cell" style="background-image: url('assets/photos/rise-against-hunger-boxes.png'); background-color: #f4ede0; background-size: contain; background-repeat: no-repeat;">
+          <div class="bf-field-cap">
+            <small>Partner · Rise Against Hunger</small>
+            <strong>$1 = 20 meals. Packed, shipped, delivered.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA BAND ========== -->
+  <section class="bf-section" data-screen-label="08 CTA">
+    <div class="bf-container">
+      <div class="bf-cta-band">
+        <span class="bf-eyebrow no-rule" style="color: hsl(var(--bf-gold-soft));">Be the change</span>
+        <h2>Your gift becomes someone's <span class="bf-script" style="font-size: 1.1em;">turning point.</span></h2>
+        <p>One-time or monthly. Every dollar pulls one more person into the gathering — fed, taught, equipped — and turns them, in time, into a ray for the next.</p>
+        <div style="display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center;">
+          <a class="bf-btn bf-btn-primary bf-btn-lg" href="giving.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Give Now
+          </a>
+          <a class="bf-btn bf-btn-ghost bf-btn-lg" href="get-involved.html" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); color: white;">
+            Volunteer instead
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div data-shell="footer"></div>
+
+<script src="assets/shell.js"></script>
+<script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+<script type="text/babel" src="assets/tweaks-controller.jsx"></script>
+<script>
+// React to hero style tweaks
+const observer = new MutationObserver(() => {
+  const mode = document.body.dataset.heroStyle || "motion";
+  const art = document.getElementById("bf-hero-art");
+  if (art) art.dataset.mode = mode;
+});
+observer.observe(document.body, { attributes: true, attributeFilter: ["data-hero-style"] });
+
+// Stories slider
+(function() {
+  const track = document.getElementById('bf-stories-track');
+  const prev  = document.getElementById('bf-stories-prev');
+  const next  = document.getElementById('bf-stories-next');
+  const dotsWrap = document.getElementById('bf-stories-dots');
+  if (!track || !prev || !next || !dotsWrap) return;
+
+  const cards = Array.from(track.querySelectorAll('.bf-story'));
+
+  function pageSize() {
+    // How many cards fit on screen
+    const cardW = cards[0].getBoundingClientRect().width;
+    const gap = parseFloat(getComputedStyle(track).gap) || 24;
+    return Math.max(1, Math.round(track.clientWidth / (cardW + gap)));
+  }
+
+  function pageCount() {
+    return Math.max(1, Math.ceil(cards.length / pageSize()));
+  }
+
+  function currentPage() {
+    const cardW = cards[0].getBoundingClientRect().width;
+    const gap = parseFloat(getComputedStyle(track).gap) || 24;
+    const step = (cardW + gap) * pageSize();
+    return Math.round(track.scrollLeft / step);
+  }
+
+  function renderDots() {
+    const total = pageCount();
+    const cur = currentPage();
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const b = document.createElement('button');
+      b.className = 'bf-slider-dot' + (i === cur ? ' active' : '');
+      b.setAttribute('aria-label', 'Go to page ' + (i+1));
+      b.addEventListener('click', () => goToPage(i));
+      dotsWrap.appendChild(b);
+    }
+    prev.disabled = cur <= 0;
+    next.disabled = cur >= total - 1;
+  }
+
+  function goToPage(i) {
+    const cardW = cards[0].getBoundingClientRect().width;
+    const gap = parseFloat(getComputedStyle(track).gap) || 24;
+    const step = (cardW + gap) * pageSize();
+    track.scrollTo({ left: i * step, behavior: 'smooth' });
+  }
+
+  prev.addEventListener('click', () => goToPage(Math.max(0, currentPage() - 1)));
+  next.addEventListener('click', () => goToPage(Math.min(pageCount() - 1, currentPage() + 1)));
+  track.addEventListener('scroll', () => {
+    clearTimeout(track._t);
+    track._t = setTimeout(renderDots, 80);
+  });
+  window.addEventListener('resize', renderDots);
+  renderDots();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Programs — Buzizi Foundation</title>
+<link rel="icon" href="assets/favicon.png" />
+<link rel="stylesheet" href="assets/foundation.css" />
+<link rel="stylesheet" href="assets/spacing-fixes.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body class="bf">
+
+<div data-shell="nav" data-active="programs"></div>
+
+<section class="bf-page-hero">
+  <div class="bf-container">
+    <div class="bf-page-hero-row">
+      <div>
+        <span class="bf-eyebrow">Programs</span>
+        <h1>Three pillars. <span class="bf-script">One flywheel.</span></h1>
+        <p>We don't run a long list of programs. We run one engine — Feed, Educate, Equip — where each pillar funds the next, and every dollar moves through people who were once on the receiving end of it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bf-section bf-partners-strip" style="padding: 56px 0; background: hsl(var(--bf-ivory)); border-top: 1px solid hsl(var(--bf-rule)); border-bottom: 1px solid hsl(var(--bf-rule));">
+  <div class="bf-container">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <span class="bf-eyebrow">In partnership with</span>
+      <h3 style="font-size: 22px; margin-top: 12px; font-weight: 400; color: var(--page-fg-soft);">The organizations and ecosystems that fund and power our flywheel.</h3>
+    </div>
+    <div class="bf-partner-logos" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; align-items: center; justify-items: center; max-width: 980px; margin: 0 auto;">
+      <a href="https://www.riseagainsthunger.org" target="_blank" rel="noopener" class="bf-partner-logo" title="Rise Against Hunger" style="display: grid; place-items: center; padding: 20px; border: 1px solid hsl(var(--bf-rule)); border-radius: 14px; background: #fff; transition: transform .2s ease, box-shadow .2s ease; text-decoration: none; width: 100%; min-height: 120px;">
+        <img src="assets/partners/rise-against-hunger.png" alt="Rise Against Hunger" style="max-width: 140px; max-height: 80px; object-fit: contain;">
+      </a>
+      <a href="https://earningblueprints.com" target="_blank" rel="noopener" class="bf-partner-logo" title="Earning Blueprints" style="display: grid; place-items: center; padding: 20px; border: 1px solid hsl(var(--bf-rule)); border-radius: 14px; background: #fff; transition: transform .2s ease, box-shadow .2s ease; text-decoration: none; width: 100%; min-height: 120px;">
+        <img src="assets/partners/earning-blueprints-logo.png" alt="Earning Blueprints" style="max-width: 140px; max-height: 80px; object-fit: contain;">
+      </a>
+      <a href="https://claudebuzizi.com" target="_blank" rel="noopener" class="bf-partner-logo" title="Claude Buzizi" style="display: grid; place-items: center; padding: 20px; border: 1px solid hsl(var(--bf-rule)); border-radius: 14px; background: #fff; transition: transform .2s ease, box-shadow .2s ease; text-decoration: none; width: 100%; min-height: 120px;">
+        <img src="assets/partners/claude-buzizi.png" alt="Claude Buzizi" style="max-width: 140px; max-height: 80px; object-fit: contain;">
+      </a>
+      <a href="https://mognetizemarketing.com" target="_blank" rel="noopener" class="bf-partner-logo" title="Mognetize Marketing" style="display: grid; place-items: center; padding: 20px; border: 1px solid hsl(var(--bf-rule)); border-radius: 14px; background: hsl(var(--bf-navy-deep)); transition: transform .2s ease, box-shadow .2s ease; text-decoration: none; width: 100%; min-height: 120px;">
+        <img src="assets/partners/mognetize-marketing.webp" alt="Mognetize Marketing" style="max-width: 140px; max-height: 80px; object-fit: contain;">
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bf-partner-logo:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.06); }
+  @media (max-width: 720px) {
+    .bf-partner-logos { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+</style>
+
+<section class="bf-section" id="fund">
+  <div class="bf-container">
+    <div class="bf-numlist">
+      <div class="bf-numitem">
+        <div class="bf-num">01</div>
+        <div>
+          <h3>Feed — in partnership with Rise Against Hunger <img src="assets/partners/rise-against-hunger-favicon.png" alt="" style="height: 22px; width: 22px; vertical-align: middle; margin-left: 6px; border-radius: 4px;"></h3>
+          <p>Meals delivered through Rise Against Hunger's network into communities facing the highest rates of food insecurity. Every dollar directed here is matched against RAH's $0.05-per-meal cost — so $1 puts <b>20 meals</b> on a table. No overhead skim, no warehousing. Direct, packed, shipped.</p>
+        </div>
+        <div class="bf-numitem-meta">
+          <span><img src="assets/partners/rise-against-hunger-favicon.png" alt="Rise Against Hunger" style="height: 14px; width: 14px; vertical-align: middle; margin-right: 6px; border-radius: 3px;"><b>Partner</b>·· Rise Against Hunger</span>
+          <span><b>Mechanic</b>·· $1 = 20 meals</span>
+          <span><img src="https://www.google.com/s2/favicons?domain=earningblueprints.com&sz=32" alt="Earning Blueprints" style="height: 14px; width: 14px; vertical-align: middle; margin-right: 6px; border-radius: 3px;"><b>Funded by</b>·· Earning Blueprints + donors</span>
+        </div>
+      </div>
+      <div class="bf-numitem">
+        <div class="bf-num">02</div>
+        <div>
+          <h3>Educate — scholarships and masterclass access</h3>
+          <p>Tuition support and masterclass seats for underserved youth — the kid in the village or the neighborhood who has the talent but not the doorway. Recipients gain access to the same curriculum and coaching infrastructure that built Mognetize Marketing, alongside their formal schooling.</p>
+        </div>
+        <div class="bf-numitem-meta">
+          <span><b>Coverage</b>·· Tuition + masterclass seat</span>
+          <span><img src="https://www.google.com/s2/favicons?domain=earningblueprints.com&sz=32" alt="Earning Blueprints" style="height: 14px; width: 14px; vertical-align: middle; margin-right: 6px; border-radius: 3px;"><b>Curriculum</b>·· Earning Blueprints + coaching</span>
+          <span><b>Geography</b>·· East Africa & US</span>
+        </div>
+      </div>
+      <div class="bf-numitem">
+        <div class="bf-num">03</div>
+        <div>
+          <h3>Equip — coaching that turns recipients into givers</h3>
+          <p>The exact playbook Claude used to escape 13-hour factory shifts in Rwanda — Earning Blueprints, masterclasses, and one-to-one coaching — placed in the hands of people in our programs. The goal isn't a handout that ends. It's an income stream that lets today's recipient become tomorrow's funder.</p>
+        </div>
+        <div class="bf-numitem-meta">
+          <span><b>Format</b>·· Masterclass + coaching</span>
+          <span><img src="https://www.google.com/s2/favicons?domain=earningblueprints.com&sz=32" alt="Earning Blueprints" style="height: 14px; width: 14px; vertical-align: middle; margin-right: 6px; border-radius: 3px;"><b>Curriculum</b>·· Earning Blueprints</span>
+          <span><b>Outcome</b>·· Income, not dependence</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 80px; padding: 40px; background: hsl(var(--bf-ivory)); border: 1px solid hsl(var(--bf-rule)); border-radius: 22px;">
+      <span class="bf-eyebrow no-rule">How the flywheel turns</span>
+      <h3 style="font-size: 28px; margin-top: 14px; max-width: 760px;">Income built on the Mognetize side feeds the Foundation. The Foundation feeds, educates, and equips. The equipped become the next generation of givers.</h3>
+      <p style="font-size: 16.5px; line-height: 1.65; max-width: 760px;">When you subscribe to <b>Earning Blueprints</b> for $1, we donate 20 meals through Rise Against Hunger in your name. When you give to the Foundation directly, you choose which pillar to fund. Either way, the same conviction holds: <em>your success should not stop with you.</em></p>
+    </div>
+
+    <div style="text-align: center; margin-top: 64px;">
+      <a class="bf-btn bf-btn-primary bf-btn-lg" href="giving.html">Designate your gift to a pillar</a>
+    </div>
+  </div>
+</section>
+
+<div data-shell="footer"></div>
+
+<script src="assets/shell.js"></script>
+<script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+<script type="text/babel" src="assets/tweaks-controller.jsx"></script>
+</body>
+</html>

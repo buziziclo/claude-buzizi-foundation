@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact — Buzizi Foundation</title>
+<link rel="icon" href="assets/favicon.png" />
+<link rel="stylesheet" href="assets/foundation.css" />
+<link rel="stylesheet" href="assets/spacing-fixes.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+.bf-contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: start; }
+@media (max-width: 980px) { .bf-contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+.bf-contact-card {
+  background: hsl(var(--bf-ivory));
+  border: 1px solid hsl(var(--bf-rule));
+  border-radius: 22px;
+  padding: 36px;
+  box-shadow: var(--bf-shadow-card);
+}
+
+.bf-contact-meta { display: flex; flex-direction: column; gap: 22px; }
+.bf-contact-meta-item {
+  display: flex; gap: 18px; align-items: start;
+}
+.bf-contact-meta-item .icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: hsl(var(--bf-orange) / 0.1);
+  color: var(--bf-accent);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.bf-contact-meta-item .icon svg { width: 20px; height: 20px; }
+.bf-contact-meta-item h4 { font-size: 16px; margin: 0 0 4px; font-family: var(--font-sans); font-weight: 600; }
+.bf-contact-meta-item p { font-size: 14.5px; margin: 0; }
+.bf-contact-meta-item a { color: var(--bf-accent); text-decoration: none; font-weight: 500; }
+.bf-contact-meta-item a:hover { text-decoration: underline; }
+
+.bf-success {
+  display: none;
+  padding: 22px;
+  background: hsl(var(--bf-success) / 0.08);
+  border: 1px solid hsl(var(--bf-success) / 0.3);
+  border-radius: 12px;
+  color: hsl(var(--bf-success));
+  font-weight: 500;
+  text-align: center;
+}
+.bf-success.show { display: block; }
+</style>
+</head>
+<body class="bf">
+
+<div data-shell="nav" data-active="contact"></div>
+
+<section class="bf-page-hero" data-screen-label="01 Contact Hero">
+  <div class="bf-container">
+    <div class="bf-page-hero-row">
+      <div>
+        <span class="bf-eyebrow">Contact</span>
+        <h1>Let's <span class="bf-script">talk.</span></h1>
+        <p>Whether you want to partner, volunteer, ask about a major gift, or simply say hello — we read every message.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bf-section" data-screen-label="02 Contact Form">
+  <div class="bf-container">
+    <div class="bf-contact-grid">
+
+      <!-- LEFT: Form -->
+      <div>
+        <div class="bf-contact-card">
+          <span class="bf-eyebrow">Send us a message</span>
+          <h2 style="font-size: 32px; margin: 16px 0 8px;">We'll respond within 48 hours</h2>
+          <p style="font-size: 15px; margin-bottom: 28px;">For media or partnership inquiries, please mention it in the subject line.</p>
+
+          <form class="bf-form" id="contact-form">
+            <div class="bf-field-row">
+              <div class="bf-field">
+                <label class="bf-label" for="first">First Name</label>
+                <input class="bf-input" id="first" name="first" required />
+              </div>
+              <div class="bf-field">
+                <label class="bf-label" for="last">Last Name</label>
+                <input class="bf-input" id="last" name="last" required />
+              </div>
+            </div>
+            <div class="bf-field">
+              <label class="bf-label" for="email">Email</label>
+              <input class="bf-input" type="email" id="email" name="email" required />
+            </div>
+            <div class="bf-field">
+              <label class="bf-label" for="topic">What's this about?</label>
+              <select class="bf-select" id="topic" name="topic">
+                <option value="general">General inquiry</option>
+                <option value="partnership">Partnership / sponsorship</option>
+                <option value="volunteer">Volunteer interest</option>
+                <option value="major-gift">Major gift / planned giving</option>
+                <option value="press">Press & media</option>
+                <option value="application">Apply for support</option>
+              </select>
+            </div>
+            <div class="bf-field">
+              <label class="bf-label" for="message">Message</label>
+              <textarea class="bf-textarea" id="message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
+            </div>
+            <button class="bf-btn bf-btn-primary bf-btn-lg" type="submit" style="justify-content: center;">
+              Send Message
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <div class="bf-success" id="success">✓ Message received. We'll get back to you within 48 hours.</div>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT: Direct contact + officers -->
+      <div>
+        <span class="bf-eyebrow">Direct lines</span>
+        <h2 style="font-size: 32px; margin: 16px 0 24px;">Reach us directly</h2>
+
+        <div class="bf-contact-meta">
+          <div class="bf-contact-meta-item">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></div>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:hello@buzizifoundation.org">hello@buzizifoundation.org</a></p>
+              <p style="color: var(--page-fg-soft); font-size: 13px;">For all general inquiries</p>
+            </div>
+          </div>
+          <div class="bf-contact-meta-item">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div>
+              <h4>Office</h4>
+              <p>Mailing address available on request</p>
+              <p style="color: var(--page-fg-soft); font-size: 13px;">EIN provided with first reply</p>
+            </div>
+          </div>
+          <div class="bf-contact-meta-item">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <div>
+              <h4>Connect online</h4>
+              <p><a href="https://claudebuzizi.com" target="_blank" rel="noopener">claudebuzizi.com</a> · <a href="#">@buzizifoundation</a></p>
+            </div>
+          </div>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid hsl(var(--bf-rule)); margin: 40px 0;" />
+
+        <span class="bf-eyebrow">Officers & Board of Directors</span>
+        <h2 style="font-size: 28px; margin: 16px 0 20px;">Who you'll reach</h2>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="bf-contact-meta-item">
+            <div class="icon" style="overflow: hidden; padding: 0;">
+              <img src="assets/claude-2026.jpg" alt="Claude Buzizi" style="width: 100%; height: 100%; object-fit: cover;" />
+            </div>
+            <div>
+              <h4>Claude Buzizi</h4>
+              <p style="color: var(--bf-accent); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">CEO & Founder</p>
+              <p style="font-size: 14px;">Vision, partnerships, and program direction.</p>
+            </div>
+          </div>
+          <div class="bf-contact-meta-item">
+            <div class="icon" style="overflow: hidden; padding: 0;"><img src="assets/kaneza-divine.jpg" alt="Kaneza Divine" style="width: 100%; height: 100%; object-fit: cover;" /></div>
+            <div>
+              <h4>Kaneza Divine</h4>
+              <p style="color: var(--bf-accent); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Treasurer</p>
+              <p style="font-size: 14px;">Financial controls, reporting, and grant disbursement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="bf-section alt" data-screen-label="03 FAQ">
+  <div class="bf-container">
+    <div class="bf-section-head center">
+      <span class="bf-eyebrow no-rule">Frequently asked</span>
+      <h2>Quick answers before you write</h2>
+    </div>
+    <div class="bf-cards cols-2" style="max-width: 920px; margin: 0 auto;">
+      <div class="bf-card">
+        <h4>Are donations tax-deductible?</h4>
+        <p>Yes. Buzizi Foundation is a registered nonprofit. You'll receive a tax receipt with our EIN within 24 hours of any gift.</p>
+      </div>
+      <div class="bf-card">
+        <h4>How is your money allocated?</h4>
+        <p>100% of restricted gifts go to the program you designate. General gifts cover both program work and minimal operating costs — detailed in our annual report.</p>
+      </div>
+      <div class="bf-card">
+        <h4>Can I volunteer remotely?</h4>
+        <p>Yes — most of our work is digital, including masterclass facilitation and ambassador programs. See the <a href="get-involved.html" style="color: var(--bf-accent);">Get Involved</a> page.</p>
+      </div>
+      <div class="bf-card">
+        <h4>How do I apply for support?</h4>
+        <p>Use the <a href="claude-application.html" style="color: var(--bf-accent);">Claude Application</a> form under Resources, or send us an email with your situation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div data-shell="footer"></div>
+
+<script src="assets/shell.js"></script>
+<script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+<script type="text/babel" src="assets/tweaks-controller.jsx"></script>
+<script>
+document.getElementById("contact-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  document.getElementById("success").classList.add("show");
+  e.target.reset();
+  setTimeout(() => document.getElementById("success").classList.remove("show"), 6000);
+});
+</script>
+</body>
+</html>

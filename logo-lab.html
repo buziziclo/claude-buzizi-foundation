@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logo Lab — Claude Buzizi Foundation</title>
+<link rel="stylesheet" href="assets/foundation.css" />
+<link rel="stylesheet" href="assets/spacing-fixes.css" />
+<style>
+  body { background: #f4f1ea; }
+  .lab { max-width: 1280px; margin: 0 auto; padding: 80px 32px 120px; }
+  .lab-head { max-width: 760px; margin-bottom: 64px; }
+  .lab-head h1 { font-family: var(--font-display); font-size: clamp(40px, 5vw, 64px); letter-spacing: -0.025em; color: var(--page-fg); margin: 12px 0 16px; line-height: 1.05; }
+  .lab-head p { font-size: 18px; color: var(--page-fg-muted); line-height: 1.6; }
+
+  .opt {
+    background: white;
+    border: 1px solid hsl(var(--bf-rule));
+    border-radius: 24px;
+    padding: 0;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .opt-stage {
+    padding: 56px 56px 48px;
+    background: linear-gradient(180deg, #fafaf6 0%, white 100%);
+    border-bottom: 1px solid hsl(var(--bf-rule));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+  }
+  .opt-stage.dark {
+    background: linear-gradient(180deg, hsl(var(--bf-ink)) 0%, hsl(220 25% 12%) 100%);
+    border-bottom-color: rgba(255,255,255,0.06);
+  }
+  .opt-meta {
+    padding: 32px 56px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .opt-id {
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--bf-accent);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .opt-name {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: -0.015em;
+    margin-bottom: 0;
+    line-height: 1.1;
+  }
+  .opt-meta p { font-size: 15.5px; line-height: 1.7; color: var(--page-fg-muted); margin: 0; }
+  .opt-meta p + p { margin-top: 12px; }
+  .opt-meta b { color: var(--page-fg); font-weight: 600; }
+
+  .ctx-row { display: flex; align-items: center; gap: 64px; flex-wrap: wrap; padding: 24px 56px; background: #faf8f4; border-top: 1px solid hsl(var(--bf-rule)); }
+  .ctx-row.dark { background: hsl(220 25% 9%); border-top-color: rgba(255,255,255,0.06); }
+  .ctx-label { font-family: var(--font-display); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--page-fg-muted); }
+  .ctx-row.dark .ctx-label { color: hsl(var(--bf-gold-soft)); }
+
+  /* ============== Logo 1: Monogram in Circle (Crested Seal) ============== */
+  .l1 { display: flex; align-items: center; gap: 18px; text-decoration: none; color: var(--page-fg); }
+  .l1-mark {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 1.5px solid hsl(var(--bf-ink));
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    background: white;
+  }
+  .l1-mark::before {
+    content: ""; position: absolute; inset: 4px;
+    border-radius: 50%;
+    border: 0.75px solid hsl(var(--bf-ink) / 0.2);
+  }
+  .l1-mark span {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: hsl(var(--bf-ink));
+  }
+  .l1-mark span em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--bf-accent);
+  }
+  .l1-text { display: flex; flex-direction: column; line-height: 1.05; gap: 4px; }
+  .l1-text strong {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: hsl(var(--bf-ink));
+  }
+  .l1-text small {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.55);
+    font-family: var(--font-sans);
+  }
+  .dark .l1-mark { background: transparent; border-color: hsl(var(--bf-gold-soft)); }
+  .dark .l1-mark::before { border-color: hsl(var(--bf-gold-soft) / 0.3); }
+  .dark .l1-mark span { color: hsl(var(--bf-gold-soft)); }
+  .dark .l1-text strong { color: white; }
+  .dark .l1-text small { color: hsl(var(--bf-gold-soft) / 0.7); }
+
+  /* ============== Logo 2: Wordmark with Hand-drawn Underline ============== */
+  .l2 { display: flex; flex-direction: column; gap: 4px; text-decoration: none; }
+  .l2-name {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    color: hsl(var(--bf-ink));
+    line-height: 1;
+    position: relative;
+    display: inline-block;
+  }
+  .l2-name em {
+    font-family: var(--font-accent);
+    font-style: normal;
+    font-weight: 600;
+    color: var(--bf-accent);
+    font-size: 1.05em;
+    margin-right: 0.04em;
+  }
+  .l2-rule {
+    display: block;
+    width: 240px;
+    height: 8px;
+    margin-top: 4px;
+    color: var(--bf-accent);
+  }
+  .l2-sub {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.55);
+    margin-top: 6px;
+  }
+  .dark .l2-name { color: white; }
+  .dark .l2-name em { color: hsl(var(--bf-gold)); }
+  .dark .l2-rule { color: hsl(var(--bf-gold)); }
+  .dark .l2-sub { color: hsl(var(--bf-gold-soft) / 0.7); }
+
+  /* ============== Logo 3: Stacked Editorial (House Style) ============== */
+  .l3 { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; gap: 0; }
+  .l3-eyebrow {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bf-accent);
+    margin-bottom: 4px;
+  }
+  .l3-main {
+    font-family: var(--font-display);
+    font-size: 26px;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: hsl(var(--bf-ink));
+    font-weight: 400;
+  }
+  .l3-rule {
+    display: block;
+    width: 100%;
+    border-top: 1px solid hsl(var(--bf-ink) / 0.2);
+    margin: 6px 0 4px;
+  }
+  .l3-sub {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.55);
+  }
+  .dark .l3-main { color: white; }
+  .dark .l3-eyebrow { color: hsl(var(--bf-gold)); }
+  .dark .l3-rule { border-top-color: rgba(255,255,255,0.2); }
+  .dark .l3-sub { color: hsl(var(--bf-gold-soft) / 0.7); }
+
+  /* ============== Logo 4: Sigil + Wordmark (Connection symbol) ============== */
+  .l4 { display: flex; align-items: center; gap: 18px; text-decoration: none; }
+  .l4-mark {
+    width: 52px; height: 52px;
+    color: hsl(var(--bf-ink));
+  }
+  .l4-text { display: flex; flex-direction: column; line-height: 1.0; gap: 4px; }
+  .l4-text strong {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: hsl(var(--bf-ink));
+  }
+  .l4-text small {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.55);
+  }
+  .dark .l4-mark { color: hsl(var(--bf-gold)); }
+  .dark .l4-text strong { color: white; }
+  .dark .l4-text small { color: hsl(var(--bf-gold-soft) / 0.7); }
+
+  /* ============== Logo 5: Crest Badge (Heraldic seal) ============== */
+  .l5 { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+  .l5-crest {
+    width: 64px; height: 78px;
+    color: hsl(var(--bf-ink));
+  }
+  .l5-text { display: flex; flex-direction: column; line-height: 1.05; gap: 4px; }
+  .l5-text strong {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: hsl(var(--bf-ink));
+  }
+  .l5-text small {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.55);
+  }
+  .l5-text em {
+    font-family: var(--font-accent);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--bf-accent);
+    margin-top: 2px;
+  }
+  .dark .l5-crest { color: hsl(var(--bf-gold)); }
+  .dark .l5-text strong { color: white; }
+  .dark .l5-text small { color: hsl(var(--bf-gold-soft) / 0.7); }
+
+  /* ============== Logo 6: Pure Wordmark (Editorial Masthead) ============== */
+  .l6 { display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; text-align: center; }
+  .l6-top, .l6-bot {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.55);
+  }
+  .l6-name {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    color: hsl(var(--bf-ink));
+    line-height: 1;
+    padding: 4px 0;
+    border-top: 1px solid hsl(var(--bf-ink) / 0.5);
+    border-bottom: 1px solid hsl(var(--bf-ink) / 0.5);
+    margin: 2px 0;
+  }
+  .l6-name em {
+    font-family: var(--font-accent);
+    font-style: normal;
+    font-weight: 600;
+    color: var(--bf-accent);
+    margin: 0 0.06em;
+    font-size: 1.1em;
+  }
+  .dark .l6-top, .dark .l6-bot { color: hsl(var(--bf-gold-soft) / 0.8); }
+  .dark .l6-name { color: white; border-color: rgba(255,255,255,0.4); }
+  .dark .l6-name em { color: hsl(var(--bf-gold)); }
+
+  /* small sizes for context row */
+  .small .l1-mark { width: 36px; height: 36px; }
+  .small .l1-mark span { font-size: 14px; }
+  .small .l1-text strong { font-size: 13px; }
+  .small .l1-text small { font-size: 7.5px; letter-spacing: 0.3em; }
+
+  .small .l2-name { font-size: 20px; }
+  .small .l2-rule { width: 150px; height: 5px; }
+  .small .l2-sub { font-size: 8px; letter-spacing: 0.36em; margin-top: 4px; }
+
+  .small .l3-main { font-size: 16px; }
+  .small .l3-eyebrow { font-size: 7.5px; letter-spacing: 0.36em; }
+  .small .l3-sub { font-size: 8px; letter-spacing: 0.28em; }
+
+  .small .l4-mark { width: 34px; height: 34px; }
+  .small .l4-text strong { font-size: 14px; }
+  .small .l4-text small { font-size: 7.5px; letter-spacing: 0.32em; }
+
+  .small .l5-crest { width: 38px; height: 46px; }
+  .small .l5-text strong { font-size: 13px; }
+  .small .l5-text small { font-size: 7.5px; letter-spacing: 0.32em; }
+  .small .l5-text em { font-size: 10px; }
+
+  .small .l6-name { font-size: 22px; }
+  .small .l6-top, .small .l6-bot { font-size: 8px; letter-spacing: 0.36em; }
+
+  .pick {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 18px;
+    background: hsl(var(--bf-ink));
+    color: white;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border: 1px solid hsl(var(--bf-ink));
+  }
+</style>
+</head>
+<body class="bf">
+
+<div class="lab">
+  <header class="lab-head">
+    <span class="bf-eyebrow">Logo Lab</span>
+    <h1>Six premium directions for the <span class="bf-script">Foundation mark.</span></h1>
+    <p>Each shows the logo at full presentation size on a card stage, plus how it will read at real header size on light <em>and</em> dark backgrounds. Pick a number — I'll wire it across every page.</p>
+  </header>
+
+  <!-- ============== OPTION 1 — CIRCULAR MONOGRAM SEAL ============== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="l1">
+        <span class="l1-mark"><span>C<em>b</em></span></span>
+        <span class="l1-text">
+          <strong>Claude Buzizi</strong>
+          <small>Foundation</small>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 01</div>
+        <h3 class="opt-name">Circular Seal</h3>
+      </div>
+      <div>
+        <p>A monogram set inside a thin double-ring — the visual language of a chartered institution, a university crest, a private trust. The "C" is set in display weight and the "b" is set in italic accent script, so the mark itself contains the brand's two type voices.</p>
+        <p><b>Why it feels premium:</b> Restraint. Two thin lines and a piece of typography. No gradient, no fill, no icon. Reads as serious and old-money without being stuffy.</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="l1 small">
+        <span class="l1-mark"><span>C<em>b</em></span></span>
+        <span class="l1-text"><strong>Claude Buzizi</strong><small>Foundation</small></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="l1 small">
+        <span class="l1-mark"><span>C<em>b</em></span></span>
+        <span class="l1-text"><strong>Claude Buzizi</strong><small>Foundation</small></span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ============== OPTION 2 — SCRIPT-ACCENT WORDMARK ============== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="l2">
+        <span class="l2-name"><em>Claude</em>Buzizi</span>
+        <svg class="l2-rule" viewBox="0 0 240 8" preserveAspectRatio="none">
+          <path d="M2 5 Q 60 1, 120 4 T 238 3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="l2-sub">Foundation</span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 02</div>
+        <h3 class="opt-name">Script-Accent Wordmark</h3>
+      </div>
+      <div>
+        <p>Pure wordmark, no icon. "Claude" is set in your accent script, "Buzizi" in display serif — the two voices already in your brand, locked together. A hand-drawn rule traces underneath, then "Foundation" in tight uppercase tracking.</p>
+        <p><b>Why it feels premium:</b> Reads like the masthead of a magazine or a handwritten signature on a charter. The script is the difference between corporate and personal.</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="l2 small">
+        <span class="l2-name"><em>Claude</em>Buzizi</span>
+        <svg class="l2-rule" viewBox="0 0 240 8" preserveAspectRatio="none"><path d="M2 5 Q 60 1, 120 4 T 238 3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        <span class="l2-sub">Foundation</span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="l2 small">
+        <span class="l2-name"><em>Claude</em>Buzizi</span>
+        <svg class="l2-rule" viewBox="0 0 240 8" preserveAspectRatio="none"><path d="M2 5 Q 60 1, 120 4 T 238 3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        <span class="l2-sub">Foundation</span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ============== OPTION 3 — STACKED EDITORIAL ============== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="l3">
+        <span class="l3-eyebrow">The</span>
+        <span class="l3-main">Claude Buzizi</span>
+        <span class="l3-rule"></span>
+        <span class="l3-sub">Foundation</span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 03</div>
+        <h3 class="opt-name">Editorial Stack</h3>
+      </div>
+      <div>
+        <p>Three layers of typography stacked: tracked uppercase eyebrow ("THE"), display-serif name, hairline rule, tracked uppercase footer ("FOUNDATION"). Built from rules and type only — no symbol.</p>
+        <p><b>Why it feels premium:</b> This is the visual grammar of <em>Vanity Fair</em>, the New York Public Library, and the Aspen Institute. Pure typography, no decoration. The rule between lines does the work.</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="l3 small">
+        <span class="l3-eyebrow">The</span>
+        <span class="l3-main">Claude Buzizi</span>
+        <span class="l3-rule"></span>
+        <span class="l3-sub">Foundation</span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="l3 small">
+        <span class="l3-eyebrow">The</span>
+        <span class="l3-main">Claude Buzizi</span>
+        <span class="l3-rule"></span>
+        <span class="l3-sub">Foundation</span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ============== OPTION 4 — SIGIL ============== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="l4">
+        <svg class="l4-mark" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5">
+          <!-- Two intersecting arcs forming a leaf / hand / lifting shape -->
+          <path d="M 10 42 Q 10 14, 26 6 Q 42 14, 42 42" stroke-linecap="round"/>
+          <path d="M 10 42 Q 26 30, 42 42" stroke-linecap="round"/>
+          <circle cx="26" cy="22" r="2.5" fill="currentColor" stroke="none"/>
+        </svg>
+        <span class="l4-text">
+          <strong>Claude Buzizi Foundation</strong>
+          <small>Feed · Educate · Equip</small>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 04</div>
+        <h3 class="opt-name">Lifting Sigil</h3>
+      </div>
+      <div>
+        <p>A custom sigil — two arcs forming the silhouette of a lifted hand, a leaf, or a doorway. The dot inside reads as the person being lifted. Paired with a single-line wordmark and your three pillars as a tracked subtitle.</p>
+        <p><b>Why it feels premium:</b> A custom mark elevates the brand beyond pure typography. The geometry is ambiguous on purpose — it works as a hand, a flame, a sail. Every viewer projects their own meaning.</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="l4 small">
+        <svg class="l4-mark" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M 10 42 Q 10 14, 26 6 Q 42 14, 42 42" stroke-linecap="round"/><path d="M 10 42 Q 26 30, 42 42" stroke-linecap="round"/><circle cx="26" cy="22" r="2.5" fill="currentColor" stroke="none"/></svg>
+        <span class="l4-text"><strong>Claude Buzizi Foundation</strong><small>Feed · Educate · Equip</small></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="l4 small">
+        <svg class="l4-mark" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M 10 42 Q 10 14, 26 6 Q 42 14, 42 42" stroke-linecap="round"/><path d="M 10 42 Q 26 30, 42 42" stroke-linecap="round"/><circle cx="26" cy="22" r="2.5" fill="currentColor" stroke="none"/></svg>
+        <span class="l4-text"><strong>Claude Buzizi Foundation</strong><small>Feed · Educate · Equip</small></span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ============== OPTION 5 — HERALDIC CREST ============== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="l5">
+        <svg class="l5-crest" viewBox="0 0 64 78" fill="none" stroke="currentColor" stroke-width="1.25">
+          <!-- Shield outline -->
+          <path d="M 6 6 L 58 6 L 58 42 Q 58 64, 32 76 Q 6 64, 6 42 Z" stroke-linejoin="round"/>
+          <!-- Inner shield -->
+          <path d="M 12 12 L 52 12 L 52 41 Q 52 60, 32 70 Q 12 60, 12 41 Z" stroke-width="0.6" stroke-opacity="0.4"/>
+          <!-- Monogram inside -->
+          <text x="32" y="44" text-anchor="middle" font-family="Fraunces, serif" font-size="22" font-weight="500" fill="currentColor" stroke="none">CB</text>
+          <!-- Banner / division line -->
+          <line x1="14" y1="52" x2="50" y2="52" stroke-width="0.6" stroke-opacity="0.4"/>
+          <!-- Three pillar dots -->
+          <circle cx="22" cy="60" r="1.4" fill="currentColor" stroke="none"/>
+          <circle cx="32" cy="60" r="1.4" fill="currentColor" stroke="none"/>
+          <circle cx="42" cy="60" r="1.4" fill="currentColor" stroke="none"/>
+        </svg>
+        <span class="l5-text">
+          <strong>Claude Buzizi</strong>
+          <small>Foundation · Est. 2024</small>
+          <em>Feed · Educate · Equip</em>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 05</div>
+        <h3 class="opt-name">Heraldic Crest</h3>
+      </div>
+      <div>
+        <p>A shield-form crest holding the CB monogram, with three dots representing Feed, Educate, and Equip. Paired with the wordmark, a founding-year line, and the three pillars in script accent.</p>
+        <p><b>Why it feels premium:</b> Borrows the visual authority of family foundations and old institutions (Rockefeller, Ford, Mellon). Says "we mean to be here for a hundred years." Use sparingly — this is the most formal of the six.</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="l5 small">
+        <svg class="l5-crest" viewBox="0 0 64 78" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M 6 6 L 58 6 L 58 42 Q 58 64, 32 76 Q 6 64, 6 42 Z" stroke-linejoin="round"/><path d="M 12 12 L 52 12 L 52 41 Q 52 60, 32 70 Q 12 60, 12 41 Z" stroke-width="0.6" stroke-opacity="0.4"/><text x="32" y="44" text-anchor="middle" font-family="Fraunces, serif" font-size="22" font-weight="500" fill="currentColor" stroke="none">CB</text><line x1="14" y1="52" x2="50" y2="52" stroke-width="0.6" stroke-opacity="0.4"/><circle cx="22" cy="60" r="1.4" fill="currentColor" stroke="none"/><circle cx="32" cy="60" r="1.4" fill="currentColor" stroke="none"/><circle cx="42" cy="60" r="1.4" fill="currentColor" stroke="none"/></svg>
+        <span class="l5-text"><strong>Claude Buzizi</strong><small>Foundation</small></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="l5 small">
+        <svg class="l5-crest" viewBox="0 0 64 78" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M 6 6 L 58 6 L 58 42 Q 58 64, 32 76 Q 6 64, 6 42 Z" stroke-linejoin="round"/><path d="M 12 12 L 52 12 L 52 41 Q 52 60, 32 70 Q 12 60, 12 41 Z" stroke-width="0.6" stroke-opacity="0.4"/><text x="32" y="44" text-anchor="middle" font-family="Fraunces, serif" font-size="22" font-weight="500" fill="currentColor" stroke="none">CB</text><line x1="14" y1="52" x2="50" y2="52" stroke-width="0.6" stroke-opacity="0.4"/><circle cx="22" cy="60" r="1.4" fill="currentColor" stroke="none"/><circle cx="32" cy="60" r="1.4" fill="currentColor" stroke="none"/><circle cx="42" cy="60" r="1.4" fill="currentColor" stroke="none"/></svg>
+        <span class="l5-text"><strong>Claude Buzizi</strong><small>Foundation</small></span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ============== OPTION 6 — EDITORIAL MASTHEAD ============== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="l6">
+        <span class="l6-top">— Established 2024 —</span>
+        <span class="l6-name">Claude<em>Buzizi</em>Foundation</span>
+        <span class="l6-bot">Feed · Educate · Equip</span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 06</div>
+        <h3 class="opt-name">Editorial Masthead</h3>
+      </div>
+      <div>
+        <p>The full name laid out as a single horizontal masthead, with the middle word ("Buzizi") set in script accent. Bracketed top and bottom by hairline rules and tracked details — the founding year above, the three pillars below.</p>
+        <p><b>Why it feels premium:</b> This is a newspaper nameplate, a benefit-dinner invitation, a stationery letterhead. Works beautifully on a single line at the top of any document. Use this when the logo gets to <em>be</em> the design (covers, posters, plaques).</p>
+      </div>
+    </div>
+    <div class="ctx-row">
+      <span class="ctx-label">Header preview</span>
+      <a class="l6 small">
+        <span class="l6-top">— Established 2024 —</span>
+        <span class="l6-name">Claude<em>Buzizi</em>Foundation</span>
+        <span class="l6-bot">Feed · Educate · Equip</span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer preview</span>
+      <a class="l6 small">
+        <span class="l6-top">— Established 2024 —</span>
+        <span class="l6-name">Claude<em>Buzizi</em>Foundation</span>
+        <span class="l6-bot">Feed · Educate · Equip</span>
+      </a>
+    </div>
+  </article>
+
+  <!-- recommendation -->
+  <div style="background: hsl(var(--bf-ink)); color: white; padding: 48px 56px; border-radius: 24px; margin-top: 48px;">
+    <span class="bf-eyebrow no-rule" style="color: hsl(var(--bf-gold-soft));">My recommendation</span>
+    <h3 style="font-family: var(--font-display); font-size: 28px; margin: 12px 0 12px; color: white; max-width: 720px;">Option 02 (Script-Accent Wordmark) for the brand. Option 01 (Circular Seal) as a favicon / app icon companion.</h3>
+    <p style="font-size: 16px; line-height: 1.6; max-width: 720px; color: hsl(0 0% 100% / 0.78);">The script-accent wordmark gives the brand its personal voice without becoming a logo-with-a-face. The circular seal gives you the small-format mark you need wherever the wordmark won't fit (favicon, social avatar, embossed plaques). Together they cover every situation a foundation actually needs.</p>
+    <p style="font-size: 14px; color: hsl(var(--bf-gold-soft)); margin-top: 12px;">Tell me which option (or which combination) and I'll wire it into every page header and footer.</p>
+  </div>
+</div>
+
+</body>
+</html>

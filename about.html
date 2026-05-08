@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About — Buzizi Foundation</title>
+<link rel="icon" href="assets/favicon.png" />
+<link rel="stylesheet" href="assets/foundation.css" />
+<link rel="stylesheet" href="assets/spacing-fixes.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+.bf-vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+@media (max-width: 980px) { .bf-vision-grid { grid-template-columns: 1fr; gap: 32px; } }
+.bf-vision-card {
+  padding: 40px;
+  border-radius: 22px;
+  background: hsl(var(--bf-ivory));
+  border: 1px solid hsl(var(--bf-rule));
+  position: relative;
+  overflow: hidden;
+}
+.bf-vision-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--bf-accent-grad);
+}
+.bf-vision-card h3 { font-size: 28px; margin-bottom: 14px; }
+
+.bf-timeline { position: relative; padding-left: 48px; }
+.bf-timeline::before {
+  content: ""; position: absolute; left: 14px; top: 8px; bottom: 8px;
+  width: 2px; background: hsl(var(--bf-rule));
+}
+.bf-timeline-item { position: relative; padding: 0 0 40px; }
+.bf-timeline-item::before {
+  content: ""; position: absolute; left: -41px; top: 4px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bf-accent-grad);
+  box-shadow: 0 0 0 4px hsl(var(--bf-ivory));
+}
+.bf-timeline-year {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--bf-accent);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.bf-timeline-item h3 { font-size: 22px; margin-bottom: 6px; }
+.bf-timeline-item p { font-size: 15.5px; margin: 0; }
+</style>
+</head>
+<body class="bf">
+
+<div data-shell="nav" data-active="about"></div>
+
+<section class="bf-page-hero" data-screen-label="01 About Hero">
+  <div class="bf-container">
+    <div class="bf-page-hero-row">
+      <div>
+        <span class="bf-eyebrow">About the Foundation</span>
+        <h1>One source. <span class="bf-script">A gathering without borders.</span></h1>
+        <p>The Foundation began with a promise made to a father — Claver Buzizi — who, after the 1994 Genocide against the Tutsi in Rwanda, started a non-charity project in his home village of Bisesero (Kibuye) to help widows and people in need. His son Claude has carried that work forward into a foundation that now serves communities far beyond Rwanda — wherever a meal, a scholarship, or a skill can change the trajectory of a life.</p>
+      </div>
+      <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+        <a class="bf-btn bf-btn-primary" href="giving.html">Donate</a>
+        <a class="bf-btn bf-btn-ghost" href="contact.html">Get In Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bf-section" data-screen-label="02 Mission Vision">
+  <div class="bf-container">
+    <div class="bf-vision-grid">
+      <div class="bf-vision-card">
+        <span class="bf-eyebrow">Our Mission</span>
+        <h3 style="margin-top: 16px;">What we exist to do</h3>
+        <p style="font-size: 17px; line-height: 1.65;">To be a source of warmth — meals, scholarships, and income-building skills — and to gather around it the people who have been kept furthest from it.</p>
+        <p style="font-size: 16px;">Three rays from one source — <b>Feed, Educate, Equip</b> — and the discipline of turning every person we reach into a ray for the next.</p>
+      </div>
+      <div class="bf-vision-card">
+        <span class="bf-eyebrow">Our Vision</span>
+        <h3 style="margin-top: 16px;">A gathering with no edges</h3>
+        <p style="font-size: 17px; line-height: 1.65;">A widow in Bisesero, a student in Nairobi, a young mother in Brussels, a family anywhere a need is real — every spark gets the same warmth. The work has no borders. The ray that reaches one person is the same one that, eventually, reaches the next.</p>
+        <p style="font-size: 16px;">Today's recipient becomes tomorrow's giver. That's the only model we believe in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bf-section alt" data-screen-label="03 Founder Story">
+  <div class="bf-container">
+    <div class="bf-split">
+      <div>
+        <div class="bf-split-image">
+          <img src="assets/claude-speaking.png" alt="Claude Buzizi" />
+          <span class="bf-split-image-tag">Founder</span>
+        </div>
+      </div>
+      <div>
+        <span class="bf-eyebrow">Founder's Story</span>
+        <h2 style="font-size: clamp(34px, 4vw, 52px); margin-top: 16px;">Meet <span class="bf-script">Claude Buzizi</span></h2>
+        <p style="font-size: 19px; line-height: 1.6; color: var(--page-fg-muted);">Born in Rwanda. Did my primary schooling through P3 in Nairobi, Kenya — where I learned Swahili and where the Maasai people taught me lessons in resilience I still draw from every day. Returned to Rwanda, then later moved to Belgium, where I got married and was finally able to fulfill a long-held dream: making and accepting payments online — something that, to this day, remains nearly impossible for entrepreneurs inside Rwanda.</p>
+        <p style="font-size: 16.5px; line-height: 1.6; margin-top: 14px;">The Foundation is the continuation of work my late father, <b>Claver Buzizi</b>, began after the 1994 Genocide against the Tutsi — a non-charity project in his village of Bisesero (Kibuye) to help widows and families in need. I built the Foundation to take that work global.</p>
+
+        <div class="bf-quote" style="margin-top: 24px;">
+          The only success worth keeping is the kind that gathers.
+          <div class="bf-quote-cite">Claude Buzizi · Founder & CEO</div>
+        </div>
+
+        <p style="font-size: 16.5px; margin-top: 20px;">Claude founded the Foundation to route the income, network, and curriculum of the Mognetize universe into the communities he came from. Earning Blueprints subscribers fund meals through Rise Against Hunger. Donors fund scholarships and masterclass seats. The same playbook that built Mognetize equips the next generation of givers.</p>
+
+        <a class="bf-btn bf-btn-ghost bf-btn-lg" href="https://claudebuzizi.com/mystory" target="_blank" rel="noopener" style="margin-top: 16px;">
+          Read Claude's full story at claudebuzizi.com/mystory
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bf-section" data-screen-label="04 Officers">
+  <div class="bf-container">
+    <div class="bf-section-head">
+      <span class="bf-eyebrow">Officers & Board</span>
+      <h2>The people accountable for <span class="bf-grad-text">every dollar</span></h2>
+      <p>The Foundation is governed by a working board with direct experience in entrepreneurship, financial stewardship, and community development.</p>
+    </div>
+
+    <div class="bf-cards cols-3" style="margin-top: 48px;">
+      <article class="bf-officer">
+        <div class="bf-officer-photo">
+          <img src="assets/claude-2026.jpg" alt="Claude Buzizi" />
+        </div>
+        <div class="bf-officer-body">
+          <div class="bf-officer-role">Chief Executive Officer</div>
+          <h3>Claude Buzizi</h3>
+          <p>Founder of Mognetize Marketing and a decade-plus operator across E-Automation and lifestyle businesses. Leads the Foundation's vision, partnerships, and program direction.</p>
+        </div>
+      </article>
+
+      <article class="bf-officer">
+        <div class="bf-officer-photo">
+          <img src="assets/kaneza-divine.jpg" alt="Kaneza Divine" />
+        </div>
+        <div class="bf-officer-body">
+          <div class="bf-officer-role">Treasurer</div>
+          <h3>Kaneza Divine</h3>
+          <p>Oversees the Foundation's financial controls, annual reporting, and grant disbursement. Ensures that 100% of restricted gifts reach their intended program.</p>
+        </div>
+      </article>
+
+      <article class="bf-officer">
+        <div class="bf-officer-photo bf-img-ph" style="aspect-ratio: 1/1;">SEAT OPEN<small>Board member — to be announced</small></div>
+        <div class="bf-officer-body">
+          <div class="bf-officer-role">Board Member</div>
+          <h3>Coming Soon</h3>
+          <p>An additional director will be named ahead of our next reporting cycle. We're seeking experience in scholarship access and curriculum-based youth programming.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="bf-section alt" data-screen-label="05 Timeline">
+  <div class="bf-container">
+    <div class="bf-section-head">
+      <span class="bf-eyebrow">How We Got Here</span>
+      <h2>From a side project to a foundation</h2>
+    </div>
+
+    <div class="bf-timeline">
+      <div class="bf-timeline-item">
+        <div class="bf-timeline-year">After 1994 · Bisesero, Rwanda</div>
+        <h3>Claver Buzizi's promise to the widows</h3>
+        <p>In the aftermath of the Genocide against the Tutsi, Claude's late father Claver Buzizi starts a non-charity project in his home village of Bisesero (Kibuye) to help widows and families in need. The Foundation's roots are here.</p>
+      </div>
+      <div class="bf-timeline-item">
+        <div class="bf-timeline-year">Boyhood · Nairobi, Kenya</div>
+        <h3>Primary school, Swahili, and the Maasai</h3>
+        <p>Claude is born in Rwanda and does his pre-university and primary school through P3 in Nairobi, Kenya. He learns Swahili, and the Maasai people teach him resilience strategies he still carries today. He later returns to Rwanda.</p>
+      </div>
+      <div class="bf-timeline-item">
+        <div class="bf-timeline-year">Belgium · Online Payments</div>
+        <h3>Building what Rwanda still cannot</h3>
+        <p>Claude moves to Belgium, marries, and finally fulfills his dream of making and accepting payments online — a fundamental capability still out of reach for most entrepreneurs in Rwanda. The income engine that funds the Foundation is built here.</p>
+      </div>
+      <div class="bf-timeline-item">
+        <div class="bf-timeline-year">Empower & Elevate</div>
+        <h3>The Earning Blueprints → meals pipeline</h3>
+        <p>Every Earning Blueprints subscription begins routing 20 meals through Rise Against Hunger. The model is proven: business income can become someone else's survival.</p>
+      </div>
+      <div class="bf-timeline-item">
+        <div class="bf-timeline-year">Today</div>
+        <h3>The Claude Buzizi Foundation</h3>
+        <p>The Foundation formalizes Claver's promise and takes it global — Feed, Educate, Equip — serving people wherever a need is real, from Bisesero to anywhere the work is called for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bf-section" data-screen-label="06 Values">
+  <div class="bf-container">
+    <div class="bf-section-head center">
+      <span class="bf-eyebrow no-rule">What we believe</span>
+      <h2>Five values, non-negotiable</h2>
+    </div>
+
+    <div class="bf-cards cols-3">
+      <div class="bf-card">
+        <div class="bf-card-tile muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h4>Dignity first</h4>
+        <p>Every story is told with the consent and the words of the person who lived it.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-card-tile muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h4>Outcomes over output</h4>
+        <p>We measure what changed in someone's life — not how much we spent doing it.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-card-tile muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h4>Transparent by default</h4>
+        <p>Annual reports, audited financials, and program data — all public, all the time.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-card-tile muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <h4>Local first</h4>
+        <p>We partner with leaders inside the community before we send anything in.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-card-tile muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <h4>Built to compound</h4>
+        <p>A scholarship today is a mentor tomorrow. We design programs that pay forward.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-card-tile muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h4>Faith in people</h4>
+        <p>We bet on the human in front of us — long before they have a track record to point to.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bf-section" data-screen-label="07 CTA">
+  <div class="bf-container">
+    <div class="bf-cta-band">
+      <h2>Stand with us.</h2>
+      <p>Join the donors, volunteers, and partners building the next chapter of this work.</p>
+      <div style="display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center;">
+        <a class="bf-btn bf-btn-primary bf-btn-lg" href="giving.html">Donate Now</a>
+        <a class="bf-btn bf-btn-ghost bf-btn-lg" href="contact.html" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); color: white;">Partner With Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div data-shell="footer"></div>
+
+<script src="assets/shell.js"></script>
+<script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+<script type="text/babel" src="assets/tweaks-controller.jsx"></script>
+</body>
+</html>

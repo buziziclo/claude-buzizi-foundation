@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logo Lab v3 — CBF Monograms</title>
+<link rel="stylesheet" href="assets/foundation.css" />
+<link rel="stylesheet" href="assets/spacing-fixes.css" />
+<style>
+  body { background: #f4f1ea; }
+  .lab { max-width: 1280px; margin: 0 auto; padding: 80px 32px 120px; }
+  .lab-head { max-width: 760px; margin-bottom: 48px; }
+  .lab-head h1 { font-family: var(--font-display); font-size: clamp(40px, 5vw, 60px); letter-spacing: -0.025em; margin: 12px 0 16px; line-height: 1.05; }
+  .lab-head p { font-size: 17px; color: var(--page-fg-muted); line-height: 1.65; }
+  .lab-head p + p { margin-top: 12px; }
+
+  .opt {
+    background: white;
+    border: 1px solid hsl(var(--bf-rule));
+    border-radius: 24px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .opt-stage {
+    padding: 64px 56px;
+    background: linear-gradient(180deg, #fafaf6 0%, white 100%);
+    border-bottom: 1px solid hsl(var(--bf-rule));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+  }
+  .opt-meta { padding: 28px 56px; display: grid; grid-template-columns: 1fr 2fr; gap: 48px; align-items: start; }
+  .opt-id { font-family: var(--font-display); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--bf-accent); margin-bottom: 8px; font-weight: 500; }
+  .opt-name { font-family: var(--font-display); font-size: 26px; letter-spacing: -0.015em; line-height: 1.1; margin: 0 0 8px; }
+  .opt-meta p { font-size: 15px; line-height: 1.7; color: var(--page-fg-muted); margin: 0; }
+  .opt-meta p + p { margin-top: 10px; }
+  .opt-meta b { color: var(--page-fg); font-weight: 600; }
+
+  .ctx-row { display: flex; align-items: center; gap: 56px; flex-wrap: wrap; padding: 22px 56px; background: #faf8f4; border-top: 1px solid hsl(var(--bf-rule)); }
+  .ctx-row.dark { background: hsl(220 25% 9%); border-top-color: rgba(255,255,255,0.06); }
+  .ctx-label { font-family: var(--font-display); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--page-fg-muted); }
+  .ctx-row.dark .ctx-label { color: hsl(var(--bf-gold-soft)); }
+
+  /* shared logo */
+  .clogo { display: inline-flex; align-items: center; gap: 18px; text-decoration: none; }
+  .clogo .mark { flex-shrink: 0; width: 72px; height: 72px; display: block; }
+  .clogo .text { display: flex; flex-direction: column; gap: 4px; line-height: 1; }
+  .clogo .name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink));
+  }
+  .clogo .sub {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: hsl(var(--bf-ink) / 0.55);
+  }
+  /* small (header/footer) */
+  .small.clogo { gap: 12px; }
+  .small.clogo .mark { width: 44px; height: 44px; }
+  .small.clogo .name { font-size: 14px; letter-spacing: 0.05em; }
+  .small.clogo .sub { font-size: 9px; letter-spacing: 0.28em; }
+
+  /* dark */
+  .ctx-row.dark .clogo .name { color: white; }
+  .ctx-row.dark .clogo .sub { color: hsl(var(--bf-gold-soft) / 0.75); }
+
+  /* color variants */
+  .clogo.orange .name { color: var(--bf-accent); }
+  .clogo.orange .sub  { color: hsl(var(--bf-ink)); font-weight: 600; }
+  .ctx-row.dark .clogo.orange .name { color: hsl(var(--bf-gold)); }
+  .ctx-row.dark .clogo.orange .sub  { color: white; }
+
+  .pickrow {
+    background: hsl(var(--bf-ink));
+    color: white;
+    padding: 40px 56px;
+    border-radius: 24px;
+    margin-top: 40px;
+  }
+  .pickrow h3 { font-family: var(--font-display); font-size: 26px; color: white; max-width: 760px; margin: 10px 0; }
+  .pickrow p { font-size: 15.5px; line-height: 1.6; max-width: 760px; color: hsl(0 0% 100% / 0.78); }
+</style>
+</head>
+<body class="bf">
+
+<div class="lab">
+  <header class="lab-head">
+    <span class="bf-eyebrow">Logo Lab — Round 3</span>
+    <h1>CBF linked monograms.</h1>
+    <p>Three original constructions of a CBF letterlock. All paired with a bold all-caps "CLAUDE BUZIZI" / lighter "Foundation" wordmark — and shown in two color systems: <b>ink-on-ink</b> (default) and <b>orange-name / black-foundation</b> (your requested split).</p>
+    <p>Each option shows full presentation size, then both color variants on light header and dark footer at real working size.</p>
+  </header>
+
+  <!-- ========================================================================== -->
+  <!-- OPTION 01 — Stacked Lockup: B inside C, F notched into B's spine            -->
+  <!-- ========================================================================== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="clogo">
+        <svg class="mark" viewBox="0 0 80 80" aria-hidden="true">
+          <!-- C: open arc on the left, thick stroke -->
+          <path d="M 60 16 A 28 28 0 1 0 60 64" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/>
+          <!-- B: nestled inside the C, two stacked bowls -->
+          <g transform="translate(30 18)" fill="currentColor">
+            <!-- vertical spine -->
+            <rect x="0" y="0" width="7" height="44"/>
+            <!-- top bowl -->
+            <path d="M 7 0 H 17 A 11 11 0 0 1 17 22 H 7 Z"/>
+            <!-- bottom bowl -->
+            <path d="M 7 22 H 19 A 11 11 0 0 1 19 44 H 7 Z"/>
+          </g>
+          <!-- F: integrated with the B's spine on the right -->
+          <g transform="translate(54 22)" fill="currentColor">
+            <rect x="0" y="0" width="6" height="36"/>
+            <rect x="0" y="0" width="18" height="6"/>
+            <rect x="0" y="14" width="13" height="5"/>
+          </g>
+          <!-- accent disc behind: subtle source -->
+          <circle cx="40" cy="40" r="36" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.15"/>
+        </svg>
+        <span class="text">
+          <span class="name">Claude Buzizi</span>
+          <span class="sub">Foundation</span>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 01</div>
+        <h3 class="opt-name">CBF Nested Lockup</h3>
+      </div>
+      <div>
+        <p>The C wraps the entire mark like a sheltering arc. The B sits inside it, two stacked bowls. The F locks onto the B's right spine — three letters reading as one solid form. A faint outer ring whispers the sun motif without competing.</p>
+        <p><b>Why it works:</b> Reads as a unified institutional seal at any size. The interlock is what makes it feel earned — like a foundation, not a startup.</p>
+      </div>
+    </div>
+
+    <div class="ctx-row">
+      <span class="ctx-label">Header · ink</span>
+      <a class="clogo small">
+        <svg class="mark" viewBox="0 0 80 80"><path d="M 60 16 A 28 28 0 1 0 60 64" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><g transform="translate(30 18)" fill="currentColor"><rect x="0" y="0" width="7" height="44"/><path d="M 7 0 H 17 A 11 11 0 0 1 17 22 H 7 Z"/><path d="M 7 22 H 19 A 11 11 0 0 1 19 44 H 7 Z"/></g><g transform="translate(54 22)" fill="currentColor"><rect x="0" y="0" width="6" height="36"/><rect x="0" y="0" width="18" height="6"/><rect x="0" y="14" width="13" height="5"/></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+      <a class="clogo small orange" style="color: var(--bf-accent);">
+        <svg class="mark" viewBox="0 0 80 80"><path d="M 60 16 A 28 28 0 1 0 60 64" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><g transform="translate(30 18)" fill="currentColor"><rect x="0" y="0" width="7" height="44"/><path d="M 7 0 H 17 A 11 11 0 0 1 17 22 H 7 Z"/><path d="M 7 22 H 19 A 11 11 0 0 1 19 44 H 7 Z"/></g><g transform="translate(54 22)" fill="currentColor"><rect x="0" y="0" width="6" height="36"/><rect x="0" y="0" width="18" height="6"/><rect x="0" y="14" width="13" height="5"/></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer · white</span>
+      <a class="clogo small" style="color: white;">
+        <svg class="mark" viewBox="0 0 80 80"><path d="M 60 16 A 28 28 0 1 0 60 64" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><g transform="translate(30 18)" fill="currentColor"><rect x="0" y="0" width="7" height="44"/><path d="M 7 0 H 17 A 11 11 0 0 1 17 22 H 7 Z"/><path d="M 7 22 H 19 A 11 11 0 0 1 19 44 H 7 Z"/></g><g transform="translate(54 22)" fill="currentColor"><rect x="0" y="0" width="6" height="36"/><rect x="0" y="0" width="18" height="6"/><rect x="0" y="14" width="13" height="5"/></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+      <a class="clogo small orange" style="color: hsl(var(--bf-gold));">
+        <svg class="mark" viewBox="0 0 80 80"><path d="M 60 16 A 28 28 0 1 0 60 64" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><g transform="translate(30 18)" fill="currentColor"><rect x="0" y="0" width="7" height="44"/><path d="M 7 0 H 17 A 11 11 0 0 1 17 22 H 7 Z"/><path d="M 7 22 H 19 A 11 11 0 0 1 19 44 H 7 Z"/></g><g transform="translate(54 22)" fill="currentColor"><rect x="0" y="0" width="6" height="36"/><rect x="0" y="0" width="18" height="6"/><rect x="0" y="14" width="13" height="5"/></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ========================================================================== -->
+  <!-- OPTION 02 — Linked Chain: C and B share a stem, F locks on the right        -->
+  <!-- ========================================================================== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="clogo">
+        <svg class="mark" viewBox="0 0 96 80" aria-hidden="true">
+          <!-- C as a thick C, opening right -->
+          <path d="M 28 12 A 28 28 0 1 0 28 68" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="square"/>
+          <!-- shared spine -->
+          <rect x="40" y="12" width="9" height="56" fill="currentColor"/>
+          <!-- B's two bowls hanging off the shared spine -->
+          <g fill="currentColor">
+            <path d="M 49 12 H 60 A 14 14 0 0 1 60 40 H 49 Z"/>
+            <path d="M 49 40 H 62 A 14 14 0 0 1 62 68 H 49 Z"/>
+          </g>
+          <!-- F: separate, right of B, sharing rhythm -->
+          <g transform="translate(74 14)" fill="currentColor">
+            <rect x="0" y="0" width="8" height="52"/>
+            <rect x="0" y="0" width="20" height="8"/>
+            <rect x="0" y="20" width="15" height="7"/>
+          </g>
+        </svg>
+        <span class="text">
+          <span class="name">Claude Buzizi</span>
+          <span class="sub">Foundation</span>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 02</div>
+        <h3 class="opt-name">CBF Linked Chain</h3>
+      </div>
+      <div>
+        <p>The C and B literally share a vertical stem — they are one letter doing two jobs. The F sits as a sibling on the right at the same scale and rhythm. Reads horizontally like a wordmark of three glyphs.</p>
+        <p><b>Why it works:</b> The shared stem is the visual idea — "linked" not as a ribbon but as architecture. Most legible of the three at very small sizes (favicon, social avatar).</p>
+      </div>
+    </div>
+
+    <div class="ctx-row">
+      <span class="ctx-label">Header · ink</span>
+      <a class="clogo small">
+        <svg class="mark" viewBox="0 0 96 80"><path d="M 28 12 A 28 28 0 1 0 28 68" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="square"/><rect x="40" y="12" width="9" height="56" fill="currentColor"/><g fill="currentColor"><path d="M 49 12 H 60 A 14 14 0 0 1 60 40 H 49 Z"/><path d="M 49 40 H 62 A 14 14 0 0 1 62 68 H 49 Z"/></g><g transform="translate(74 14)" fill="currentColor"><rect x="0" y="0" width="8" height="52"/><rect x="0" y="0" width="20" height="8"/><rect x="0" y="20" width="15" height="7"/></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+      <a class="clogo small orange" style="color: var(--bf-accent);">
+        <svg class="mark" viewBox="0 0 96 80"><path d="M 28 12 A 28 28 0 1 0 28 68" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="square"/><rect x="40" y="12" width="9" height="56" fill="currentColor"/><g fill="currentColor"><path d="M 49 12 H 60 A 14 14 0 0 1 60 40 H 49 Z"/><path d="M 49 40 H 62 A 14 14 0 0 1 62 68 H 49 Z"/></g><g transform="translate(74 14)" fill="currentColor"><rect x="0" y="0" width="8" height="52"/><rect x="0" y="0" width="20" height="8"/><rect x="0" y="20" width="15" height="7"/></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer · white</span>
+      <a class="clogo small" style="color: white;">
+        <svg class="mark" viewBox="0 0 96 80"><path d="M 28 12 A 28 28 0 1 0 28 68" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="square"/><rect x="40" y="12" width="9" height="56" fill="currentColor"/><g fill="currentColor"><path d="M 49 12 H 60 A 14 14 0 0 1 60 40 H 49 Z"/><path d="M 49 40 H 62 A 14 14 0 0 1 62 68 H 49 Z"/></g><g transform="translate(74 14)" fill="currentColor"><rect x="0" y="0" width="8" height="52"/><rect x="0" y="0" width="20" height="8"/><rect x="0" y="20" width="15" height="7"/></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+      <a class="clogo small orange" style="color: hsl(var(--bf-gold));">
+        <svg class="mark" viewBox="0 0 96 80"><path d="M 28 12 A 28 28 0 1 0 28 68" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="square"/><rect x="40" y="12" width="9" height="56" fill="currentColor"/><g fill="currentColor"><path d="M 49 12 H 60 A 14 14 0 0 1 60 40 H 49 Z"/><path d="M 49 40 H 62 A 14 14 0 0 1 62 68 H 49 Z"/></g><g transform="translate(74 14)" fill="currentColor"><rect x="0" y="0" width="8" height="52"/><rect x="0" y="0" width="20" height="8"/><rect x="0" y="20" width="15" height="7"/></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+    </div>
+  </article>
+
+  <!-- ========================================================================== -->
+  <!-- OPTION 03 — Circular Seal: CBF locked into a sun-disc                       -->
+  <!-- ========================================================================== -->
+  <article class="opt">
+    <div class="opt-stage">
+      <a class="clogo">
+        <svg class="mark" viewBox="0 0 80 80" aria-hidden="true">
+          <!-- Outer disc (the source) -->
+          <circle cx="40" cy="40" r="36" fill="currentColor"/>
+          <!-- Knockout the letters -->
+          <g fill="#fafaf6">
+            <!-- C -->
+            <path d="M 38 22 A 18 18 0 1 0 38 58 L 38 50 A 10 10 0 1 1 38 30 Z"/>
+            <!-- B (centered, overlapping the C's opening) -->
+            <g transform="translate(36 22)">
+              <rect x="0" y="0" width="5" height="36"/>
+              <path d="M 5 0 H 13 A 8 8 0 0 1 13 18 H 5 Z"/>
+              <path d="M 5 18 H 14 A 8 8 0 0 1 14 36 H 5 Z"/>
+            </g>
+            <!-- F to the right -->
+            <g transform="translate(50 22)">
+              <rect x="0" y="0" width="4" height="36"/>
+              <rect x="0" y="0" width="12" height="4"/>
+              <rect x="0" y="14" width="9" height="4"/>
+            </g>
+          </g>
+        </svg>
+        <span class="text">
+          <span class="name">Claude Buzizi</span>
+          <span class="sub">Foundation</span>
+        </span>
+      </a>
+    </div>
+    <div class="opt-meta">
+      <div>
+        <div class="opt-id">Option 03</div>
+        <h3 class="opt-name">CBF Sun Seal</h3>
+      </div>
+      <div>
+        <p>The CBF lockup is reverse-knocked out of a solid disc — the source of warmth from the origin story, now carrying your initials. The disc reads as the sun first, the letters second. Most "institutional crest" of the three.</p>
+        <p><b>Why it works:</b> Bridges the Gathering origin story (the source disc) and the institutional CBF monogram. Looks great as a stamp, a wax seal, an embossed wordmark on a report cover, a coin.</p>
+      </div>
+    </div>
+
+    <div class="ctx-row">
+      <span class="ctx-label">Header · ink</span>
+      <a class="clogo small">
+        <svg class="mark" viewBox="0 0 80 80"><circle cx="40" cy="40" r="36" fill="currentColor"/><g fill="#fafaf6"><path d="M 38 22 A 18 18 0 1 0 38 58 L 38 50 A 10 10 0 1 1 38 30 Z"/><g transform="translate(36 22)"><rect x="0" y="0" width="5" height="36"/><path d="M 5 0 H 13 A 8 8 0 0 1 13 18 H 5 Z"/><path d="M 5 18 H 14 A 8 8 0 0 1 14 36 H 5 Z"/></g><g transform="translate(50 22)"><rect x="0" y="0" width="4" height="36"/><rect x="0" y="0" width="12" height="4"/><rect x="0" y="14" width="9" height="4"/></g></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+      <a class="clogo small orange" style="color: var(--bf-accent);">
+        <svg class="mark" viewBox="0 0 80 80"><circle cx="40" cy="40" r="36" fill="currentColor"/><g fill="#fafaf6"><path d="M 38 22 A 18 18 0 1 0 38 58 L 38 50 A 10 10 0 1 1 38 30 Z"/><g transform="translate(36 22)"><rect x="0" y="0" width="5" height="36"/><path d="M 5 0 H 13 A 8 8 0 0 1 13 18 H 5 Z"/><path d="M 5 18 H 14 A 8 8 0 0 1 14 36 H 5 Z"/></g><g transform="translate(50 22)"><rect x="0" y="0" width="4" height="36"/><rect x="0" y="0" width="12" height="4"/><rect x="0" y="14" width="9" height="4"/></g></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+    </div>
+    <div class="ctx-row dark">
+      <span class="ctx-label">Footer · white</span>
+      <a class="clogo small" style="color: white;">
+        <svg class="mark" viewBox="0 0 80 80"><circle cx="40" cy="40" r="36" fill="currentColor"/><g fill="hsl(220 25% 9%)"><path d="M 38 22 A 18 18 0 1 0 38 58 L 38 50 A 10 10 0 1 1 38 30 Z"/><g transform="translate(36 22)"><rect x="0" y="0" width="5" height="36"/><path d="M 5 0 H 13 A 8 8 0 0 1 13 18 H 5 Z"/><path d="M 5 18 H 14 A 8 8 0 0 1 14 36 H 5 Z"/></g><g transform="translate(50 22)"><rect x="0" y="0" width="4" height="36"/><rect x="0" y="0" width="12" height="4"/><rect x="0" y="14" width="9" height="4"/></g></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+      <a class="clogo small orange" style="color: hsl(var(--bf-gold));">
+        <svg class="mark" viewBox="0 0 80 80"><circle cx="40" cy="40" r="36" fill="currentColor"/><g fill="hsl(220 25% 9%)"><path d="M 38 22 A 18 18 0 1 0 38 58 L 38 50 A 10 10 0 1 1 38 30 Z"/><g transform="translate(36 22)"><rect x="0" y="0" width="5" height="36"/><path d="M 5 0 H 13 A 8 8 0 0 1 13 18 H 5 Z"/><path d="M 5 18 H 14 A 8 8 0 0 1 14 36 H 5 Z"/></g><g transform="translate(50 22)"><rect x="0" y="0" width="4" height="36"/><rect x="0" y="0" width="12" height="4"/><rect x="0" y="14" width="9" height="4"/></g></g></svg>
+        <span class="text"><span class="name">Claude Buzizi</span><span class="sub">Foundation</span></span>
+      </a>
+    </div>
+  </article>
+
+  <div class="pickrow">
+    <span class="bf-eyebrow no-rule" style="color: hsl(var(--bf-gold-soft));">My recommendation</span>
+    <h3>Option 02 (Linked Chain) — most legible at small sizes, most "wordmark-like."</h3>
+    <p>The shared C/B stem is the strongest interlock idea, and the rhythm reads as a single brand glyph instead of three letters jammed together. Pair it with the orange-name / black-foundation color split for a confident, two-color brand system.</p>
+    <p style="margin-top: 14px; color: hsl(var(--bf-gold-soft));">Tell me which option + which color treatment, and I'll wire it across every page.</p>
+  </div>
+</div>
+
+</body>
+</html>

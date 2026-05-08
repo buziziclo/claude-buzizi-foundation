@@ -1,0 +1,32 @@
+# Environment variables (contains API tokens)
+.env
+
+# Vercel project config (created during deploy)
+.vercel/
+sites/**/.vercel/
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Foundation-specific
+Buzizi Foundation.zip
+.claude/settings.local.json
+
+# Screenshots — raw PNGs excluded (regenerated on each run)
+screenshots/
+# Compressed JPEGs tracked for Airtable attachment URLs
+!screenshots/compressed/
+
+# Temporary workbench
+.tmp/
+
+# Snapshots of openclaw.json — may contain secrets if not properly redacted
+mission-control/overrides/openclaw.json*
+
+# OpenClaw cron jobs registry (may reference env vars by name in messages)
+mission-control/overrides/cron-jobs.json
+mission-control/overrides/openclaw/cron/
