@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Claude Buzizi Foundation — Deploy Report · 2026-05-08</title>
+<style>
+  :root {
+    --bg: #0a0a1f;
+    --bg-soft: #131334;
+    --cream: #f5f0e8;
+    --cream-soft: #d8d2c5;
+    --gold: #d4a957;
+    --orange: #e35817;
+    --green: #22c55e;
+    --red: #ef4444;
+    --rule: rgba(245, 240, 232, 0.14);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 32px 96px; }
+  header { border-bottom: 1px solid var(--rule); padding-bottom: 32px; margin-bottom: 40px; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--gold);
+  }
+  h1 { font-size: 44px; line-height: 1.1; margin: 0 0 12px; font-weight: 600; letter-spacing: -0.02em; }
+  h1 em { font-style: italic; color: var(--orange); font-weight: 500; }
+  .lead { color: var(--cream-soft); font-size: 19px; max-width: 700px; margin: 0; }
+  .meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; font-size: 13px; color: var(--cream-soft); }
+  .meta b { color: var(--cream); margin-right: 4px; }
+
+  h2 { font-size: 26px; margin: 56px 0 18px; font-weight: 600; letter-spacing: -0.01em; padding-top: 24px; border-top: 1px solid var(--rule); }
+  h2:first-of-type { padding-top: 0; border-top: none; }
+  h2 .num { color: var(--gold); margin-right: 12px; font-variant-numeric: tabular-nums; }
+  h3 { font-size: 18px; margin: 28px 0 10px; font-weight: 600; }
+  p { margin: 0 0 16px; color: var(--cream); }
+  p.muted { color: var(--cream-soft); }
+  a { color: var(--orange); text-decoration: none; border-bottom: 1px solid rgba(227, 88, 23, 0.3); }
+  a:hover { border-bottom-color: var(--orange); }
+
+  ul.checklist { list-style: none; padding: 0; margin: 16px 0 24px; }
+  ul.checklist li { padding: 10px 0; border-bottom: 1px solid var(--rule); display: flex; align-items: flex-start; gap: 12px; }
+  ul.checklist li:last-child { border-bottom: none; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .badge.ok  { background: rgba(34, 197, 94, 0.18); color: var(--green); }
+  .badge.warn{ background: rgba(212, 169, 87, 0.18); color: var(--gold); }
+  .badge.no  { background: rgba(239, 68, 68, 0.18); color: var(--red); }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { color: var(--gold); font-weight: 600; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+  td code { background: var(--bg-soft); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: var(--cream); }
+  td.status { font-weight: 600; }
+  td.status.ok { color: var(--green); }
+
+  .card {
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin: 24px 0;
+  }
+  .card.urls { border-left: 3px solid var(--gold); }
+  .card.next-steps { border-left: 3px solid var(--orange); }
+
+  .url-row { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--rule); font-size: 14px; }
+  .url-row:last-child { border-bottom: none; }
+  .url-row code { background: rgba(245, 240, 232, 0.08); padding: 4px 10px; border-radius: 6px; }
+
+  .module-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 16px 0; }
+  @media (max-width: 720px) { .module-grid { grid-template-columns: 1fr; } }
+  .module {
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .module h4 { margin: 0 0 8px; font-size: 15px; color: var(--gold); letter-spacing: 0.04em; text-transform: uppercase; }
+  .module ul { padding: 0; margin: 0; list-style: none; }
+  .module li { font-size: 14px; padding: 4px 0; color: var(--cream-soft); }
+  .module li code { background: rgba(245, 240, 232, 0.06); padding: 1px 6px; border-radius: 4px; color: var(--cream); }
+
+  .partner-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 16px 0; }
+  @media (max-width: 720px) { .partner-strip { grid-template-columns: repeat(2, 1fr); } }
+  .partner {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 18px 14px;
+    text-align: center;
+  }
+  .partner.dark { background: #1a1a3a; }
+  .partner img { max-width: 100%; max-height: 50px; height: auto; }
+  .partner small { display: block; margin-top: 8px; color: rgba(0,0,0,0.6); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+  .partner.dark small { color: rgba(245, 240, 232, 0.6); }
+
+  .footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rule); color: var(--cream-soft); font-size: 13px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Deploy Report · 2026-05-08</span>
+    <h1>Claude Buzizi Foundation is <em>live.</em></h1>
+    <p class="lead">Modular folder structure, partner logos integrated, GitHub repo created, Vercel auto-deploy linked. All routes responding 200. Ready for custom-domain assignment.</p>
+    <div class="meta">
+      <span><b>Date:</b> 2026-05-08</span>
+      <span><b>Status:</b> <span style="color: var(--green); font-weight: 600;">✓ Deployed</span></span>
+      <span><b>By:</b> Claude (Opus 4.7)</span>
+    </div>
+  </header>
+
+  <h2><span class="num">01</span>Live URLs</h2>
+  <p class="muted">All 9 public routes return HTTP 200 from the production deployment.</p>
+
+  <div class="card urls">
+    <div class="url-row"><b>Production root</b><code>https://claude-buzizi-foundation.vercel.app/</code></div>
+    <div class="url-row"><b>About</b><code>/about</code></div>
+    <div class="url-row"><b>Programs</b><code>/programs</code></div>
+    <div class="url-row"><b>Partners</b><code>/partners</code></div>
+    <div class="url-row"><b>Reports</b><code>/reports</code></div>
+    <div class="url-row"><b>Get Involved</b><code>/get-involved</code></div>
+    <div class="url-row"><b>Giving</b><code>/giving</code></div>
+    <div class="url-row"><b>Apply (Claude Application)</b><code>/apply</code></div>
+    <div class="url-row"><b>Contact</b><code>/contact</code></div>
+  </div>
+
+  <h2><span class="num">02</span>What I did</h2>
+  <ul class="checklist">
+    <li><span class="badge ok">✓</span><div><b>Copied API keys</b> from <code>Alpha Sites/.env</code> to Foundation <code>.env</code> (gitignored). Mirrored <code>.env.example</code> + <code>.gitignore</code>.</div></li>
+    <li><span class="badge ok">✓</span><div><b>Read Alpha Sites CLAUDE.md</b> to understand the deploy pattern (Vercel CLI + branded subdomains via PREVIEW_DOMAIN, build log, GitHub push).</div></li>
+    <li><span class="badge ok">✓</span><div><b>Pulled 4 partner logos via Firecrawl</b>: Rise Against Hunger, Earning Blueprints, Claude Buzizi, Mognetize Marketing. Saved to <code>assets/partners/</code> with both full-logo and favicon variants.</div></li>
+    <li><span class="badge ok">✓</span><div><b>Updated <code>programs.html</code></b>: added a "In partnership with" 4-up logo strip near the top and inline favicons next to each pillar's metadata (RAH on Feed, Earning Blueprints on Educate + Equip).</div></li>
+    <li><span class="badge ok">✓</span><div><b>Updated <code>partners.html</code></b>: replaced 4 placeholder tiles with real logos linked to each partner's website.</div></li>
+    <li><span class="badge ok">✓</span><div><b>Created <code>assets/spacing-fixes.css</code></b>: site-wide spacing/polish overrides (page-hero rhythm, card grid alignment, footer breathing room, partner-tile heights). Linked from every HTML page.</div></li>
+    <li><span class="badge ok">✓</span><div><b>Restructured pages into <code>modules/</code> folders</b>: core (3 pages), programs (3), giving (3), brand-lab (4 logo drafts).</div></li>
+    <li><span class="badge ok">✓</span><div><b>Converted asset paths to root-relative</b> (<code>/assets/</code>, <code>/uploads/</code>) so pages work from any folder depth.</div></li>
+    <li><span class="badge ok">✓</span><div><b>Updated <code>assets/shell.js</code></b>: nav + footer now use clean URLs (<code>/about</code>, <code>/programs</code>, etc.).</div></li>
+    <li><span class="badge ok">✓</span><div><b>Configured <code>vercel.json</code></b>: rewrites mapping clean URLs → module paths, asset caching headers, security headers (<code>X-Content-Type-Options</code>, <code>Referrer-Policy</code>).</div></li>
+    <li><span class="badge ok">✓</span><div><b>Created <code>CLAUDE.md</code></b>: editing guide, deployment refs, file conventions, and "things to NOT do" — mirroring the Alpha Sites style.</div></li>
+    <li><span class="badge ok">✓</span><div><b>Initialized git, created GitHub repo</b> <code>buziziclo/claude-buzizi-foundation</code> (public), pushed initial + restructure commits.</div></li>
+    <li><span class="badge ok">✓</span><div><b>Created Vercel project</b> <code>claude-buzizi-foundation</code> via API, linked to GitHub repo with <code>main</code> as production branch.</div></li>
+    <li><span class="badge ok">✓</span><div><b>Verified GitHub auto-deploy</b>: a tiny commit pushed to <code>main</code> triggered an automatic Vercel build with status <code>READY</code>.</div></li>
+    <li><span class="badge ok">✓</span><div><b>Smoke-tested all 9 public routes + partner logo asset</b>: all 200 OK on <code>https://claude-buzizi-foundation.vercel.app</code>.</div></li>
+  </ul>
+
+  <h2><span class="num">03</span>Module structure</h2>
+  <p class="muted">Pages now live under <code>modules/{group}/</code>. The full map is in <code>modules/MODULES.md</code>.</p>
+
+  <div class="module-grid">
+    <div class="module">
+      <h4>core/</h4>
+      <ul>
+        <li><code>index.html</code> → <code>/</code></li>
+        <li><code>about.html</code> → <code>/about</code></li>
+        <li><code>contact.html</code> → <code>/contact</code></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>programs/</h4>
+      <ul>
+        <li><code>programs.html</code> → <code>/programs</code></li>
+        <li><code>partners.html</code> → <code>/partners</code></li>
+        <li><code>reports.html</code> → <code>/reports</code></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>giving/</h4>
+      <ul>
+        <li><code>get-involved.html</code> → <code>/get-involved</code></li>
+        <li><code>giving.html</code> → <code>/giving</code></li>
+        <li><code>claude-application.html</code> → <code>/apply</code></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>brand-lab/</h4>
+      <ul>
+        <li><code>logo-lab.html</code> → <code>/logo-lab</code></li>
+        <li><code>logo-lab-v2.html</code> → <code>/logo-lab-v2</code></li>
+        <li><code>logo-lab-v3.html</code> → <code>/logo-lab-v3</code></li>
+        <li><code>logo-lab-v4.html</code> → <code>/logo-lab-v4</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2><span class="num">04</span>Partner logos integrated</h2>
+  <p class="muted">All four logos are linked from the Programs page (4-up partnership strip + per-pillar favicons) and the Partners page (logo wall).</p>
+  <div class="partner-strip">
+    <div class="partner"><img src="../assets/partners/rise-against-hunger.png" alt="Rise Against Hunger"><small>Rise Against Hunger</small></div>
+    <div class="partner"><img src="../assets/partners/earning-blueprints-logo.png" alt="Earning Blueprints"><small>Earning Blueprints</small></div>
+    <div class="partner"><img src="../assets/partners/claude-buzizi.png" alt="Claude Buzizi"><small>Claude Buzizi</small></div>
+    <div class="partner dark"><img src="../assets/partners/mognetize-marketing.webp" alt="Mognetize Marketing"><small>Mognetize Marketing</small></div>
+  </div>
+
+  <h2><span class="num">05</span>Infrastructure</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Value</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>GitHub repo</td><td><a href="https://github.com/buziziclo/claude-buzizi-foundation" target="_blank">buziziclo/claude-buzizi-foundation</a></td><td class="status ok">✓ public, pushed</td></tr>
+      <tr><td>Vercel project</td><td><code>claude-buzizi-foundation</code> (account: buziziclo)</td><td class="status ok">✓ linked to GitHub</td></tr>
+      <tr><td>Production URL</td><td><a href="https://claude-buzizi-foundation.vercel.app" target="_blank">claude-buzizi-foundation.vercel.app</a></td><td class="status ok">✓ 200 OK</td></tr>
+      <tr><td>Auto-deploy</td><td><code>main</code> branch → Production · PR branches → Preview</td><td class="status ok">✓ verified</td></tr>
+      <tr><td>Clean URLs</td><td>Vercel rewrites in <code>vercel.json</code></td><td class="status ok">✓ working</td></tr>
+      <tr><td>Custom domain</td><td>not yet purchased</td><td class="status" style="color: var(--gold);">⏳ pending</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">06</span>Next steps — when you're back</h2>
+
+  <div class="card next-steps">
+    <h3 style="margin-top: 0;">Immediate (5–10 minutes each)</h3>
+    <ol>
+      <li><b>Open the site and click through every page</b> at <a href="https://claude-buzizi-foundation.vercel.app" target="_blank">claude-buzizi-foundation.vercel.app</a>. Spot-check spacing on mobile (resize the browser).</li>
+      <li><b>Pick a custom domain</b>. Suggestions: <code>claudebuzizifoundation.org</code>, <code>buzizifoundation.org</code>, <code>cb-foundation.org</code>. I have the <code>domain-check</code> skill ready to query availability and price across TLDs as soon as you give me a shortlist.</li>
+      <li><b>Buy the domain</b> via the <code>domain-register</code> skill (Porkbun / Namecheap / GoDaddy). Then I'll point DNS at Vercel via the <code>domain-dns-setup</code> skill — A/CNAME records typically resolve in under 10 minutes.</li>
+      <li><b>Assign domain to Vercel project</b>: one CLI command (<code>vercel domains add &lt;domain&gt;</code>) once DNS is set.</li>
+    </ol>
+
+    <h3>Soon (this week)</h3>
+    <ul>
+      <li><b>Wire up the contact form + Claude Application form</b>. Right now they alert/reset on submit. Two clean options: (a) Airtable (we already have <code>AIRTABLE_API_KEY</code> in <code>.env</code>) or (b) a simple Vercel function that emails to <code>support@claudebuzizi.com</code>.</li>
+      <li><b>Drop in 2025 Annual Report PDF</b> when ready. Just save to <code>assets/reports/2025-annual-report.pdf</code> and update the link in <code>modules/programs/reports.html</code>.</li>
+      <li><b>Pick the final logo from <code>brand-lab/</code></b>. Once chosen, I'll promote it into <code>assets/shell.js</code> as the production mark and retire the lab pages from public deploy.</li>
+    </ul>
+
+    <h3>When you're editing in Lovable</h3>
+    <ul>
+      <li>Lovable can pull this repo directly (it's public on GitHub). Push from Lovable → GitHub → auto-deploy to Vercel. The full chain is wired.</li>
+      <li>Asset paths are root-relative (<code>/assets/...</code>) — Lovable preview will resolve them via <code>vercel dev</code> mode.</li>
+      <li>The full editing guide is in <code>CLAUDE.md</code>. The "Things to NOT do" list at the bottom calls out the gotchas (don't move pages out of module folders, don't paste secrets, don't edit foundation.css for ad-hoc polish — use spacing-fixes.css).</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">07</span>Files changed / created</h2>
+  <table>
+    <thead><tr><th>Path</th><th>What</th></tr></thead>
+    <tbody>
+      <tr><td><code>.env</code></td><td>Copied from Alpha Sites (gitignored)</td></tr>
+      <tr><td><code>.env.example</code> · <code>.gitignore</code></td><td>Mirrored from Alpha Sites</td></tr>
+      <tr><td><code>.claude/settings.json</code></td><td>Bypass-permissions mode for this workspace</td></tr>
+      <tr><td><code>CLAUDE.md</code></td><td>New — editing guide, deployment refs, conventions</td></tr>
+      <tr><td><code>README.md</code></td><td>New — project intro</td></tr>
+      <tr><td><code>vercel.json</code></td><td>New — clean-URL rewrites + caching/security headers</td></tr>
+      <tr><td><code>modules/MODULES.md</code></td><td>New — full module map</td></tr>
+      <tr><td><code>modules/{core,programs,giving,brand-lab}/</code></td><td>New folders with all <code>.html</code> pages moved in + per-module READMEs</td></tr>
+      <tr><td><code>assets/spacing-fixes.css</code></td><td>New — site-wide spacing/polish overrides</td></tr>
+      <tr><td><code>assets/partners/*.png</code> + <code>.webp</code></td><td>8 new logo + favicon files for the 4 partners</td></tr>
+      <tr><td><code>assets/shell.js</code></td><td>Updated — nav/footer use clean URLs</td></tr>
+      <tr><td><code>modules/programs/programs.html</code></td><td>Added partner strip + per-pillar favicons</td></tr>
+      <tr><td><code>modules/programs/partners.html</code></td><td>Replaced placeholders with real partner logos</td></tr>
+      <tr><td>All <code>.html</code> files</td><td>Asset paths root-relative; cross-page links cleaned to <code>/about</code> etc.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    Generated 2026-05-08 · The Claude Buzizi Foundation · Feed · Educate · Equip
+  </div>
+
+</div>
+</body>
+</html>
