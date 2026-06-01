@@ -1,3 +1,42 @@
+<!-- AI_BRAIN_PROJECT_MEMORY_V1 -->
+# AI Brain project memory
+
+## Project identity
+- Project name: Claude Buzizi Foundation
+- Project type: Foundation website / nonprofit presence
+- Primary folder: `/Users/buzizidigiprofits/Documents/Vibe Coding/Claude Buzizi Foundation`
+- Claude memory file: `/Users/buzizidigiprofits/Documents/Vibe Coding/Claude Buzizi Foundation/CLAUDE.md`
+- Last standardized: 2026-06-01
+- Obsidian-ready: yes
+
+## What this project is
+Claude Buzizi Foundation — Site Agent
+
+## Agent entry protocol
+1. Read this `CLAUDE.md` first.
+2. Treat the **AI Brain project memory** section as the operating map.
+3. Then read the original project notes below before editing code, data, prompts, automations, or deployment settings.
+4. Do not assume secrets exist in this file. Credentials belong in `.env`, platform dashboards, or the configured secret store only.
+5. If you discover a durable fact, append it under **Project memory** with an ISO date.
+
+## Project memory
+- 2026-06-01: Standardized for AI Brain ingestion. Original project instructions are preserved below under **Original project instructions**.
+
+## Safety guardrails
+- Do not commit credentials, tokens, cookies, `.env` files, exported browser profiles, local database dumps, or generated private data.
+- Do not overwrite the original workflow without first preserving the existing behavior.
+- Prefer section-by-section fixes over wholesale rebuilds.
+- When preparing Obsidian memory, summarize decisions and architecture, not secrets or transient task logs.
+
+## Obsidian memory export
+- Suggested note title: `Claude Buzizi Foundation — Project Memory`
+- Suggested tags: `#ai-brain #project-memory #agent-handoff`
+- Export status: ready after human review
+
+---
+
+# Original project instructions
+
 # Claude Buzizi Foundation — Site Agent
 
 > Static, multi-page HTML site for **The Claude Buzizi Foundation**.
